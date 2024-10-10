@@ -1,0 +1,321 @@
+/* General Styles */
+html {
+  font-family: system-ui, sans-serif;
+  font-size: 1.25rem;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f1f3f4;
+}
+
+svg {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+}
+
+/* Page Containers */
+.app-container {
+  background-color: #f1f3f4; 
+}
+
+.map-container {
+  background-color: #ADD8E6; 
+  padding: 1rem;
+}
+
+.plots-container {
+  background-color: #f1f3f4; 
+  padding: 1rem;
+}
+
+
+/* About */
+.about-section {
+  text-align: center;
+  justify-content: center;
+  padding: 20px;
+  width: 1000px; 
+  margin: 20px auto; 
+}
+
+.about-section h4 {
+  color: #333333; 
+  font-size: 24px;
+  margin-bottom: 10px; 
+}
+
+.about-section p {
+  color: #666666;
+  font-size: 16px; 
+  line-height: 1.5;
+}
+
+/* Map Elements */
+/* State Styles */
+.state {
+  stroke: #000000; 
+  stroke-width: 0.3;
+}
+
+.state-label {
+  fill: #000000;
+  font-weight: bold;
+  text-anchor: middle;
+}
+
+.state-label-rect {
+  fill: #FFFFFF;
+  stroke: #000000;
+  stroke-width: 0.5;
+  rx: 4;
+  ry: 4;
+  opacity: 0.9;
+}
+
+/* County Styles */
+.county {
+  stroke: #FFFFFF; 
+  stroke-width: 0.2;
+}
+
+.county.hover {
+ fill: #333333; 
+}
+
+/* Marker Styles */
+.marker {
+  fill: #3b3b3b; 
+  transition: r 0.3s ease;  
+}
+
+.coverage {
+  fill: none;
+  stroke: #777777;
+  stroke-width: 0.5;
+}
+
+.population {
+  fill: #FFF000; 
+  transition: r 0.3s ease; 
+}
+
+/* Tooltip Styles */
+.radio-tooltip {
+  fill: #000000; 
+  font-size: 8px;
+  font-weight: bold;
+  padding-left: 10px;
+}
+
+.radio-tooltip-background {
+  fill: #f5f5f5;           
+  stroke: #e0e0e0;          
+  opacity: 0.95;            
+  rx: 8;                  
+  ry: 8;
+  padding: 8px;             
+}
+
+.marker-tooltip {
+  position: fixed;
+  fill: 000000; 
+  font-size: 12px;  
+  font-weight: bold;
+}
+
+.marker-tooltip-background {
+  position: fixed;
+  fill: #f5f5f5;           
+  stroke: #e0e0e0;          
+  opacity: 0.95;            
+  rx: 8;                  
+  ry: 8;
+  padding: 8px;        
+}
+
+.county-tooltip {
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 5px;
+  font-size: 12px;
+  border-radius: 3px;
+  rx: 5;  
+  ry: 5;
+}
+
+.data-tooltip {
+  background-color: #000000;
+  color: #FFFFFF;
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 3px;
+  rx: 10;  
+  ry: 10; 
+}
+
+/* Button for map */
+.button {
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
+  padding: 10px 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.toast {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #333333;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  opacity: 0.9;
+}
+
+.dropdown-container {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.dropdown-container label {
+  color: white;
+}
+
+.dropdown {
+  padding: 8px;
+  border-radius: 4px;
+  margin-left: 10px;
+}
+
+/* Button for plots */
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  margin: 0 auto;
+}
+
+.button-plot {
+  position: relative;
+  bottom: 20px;
+  right: 50px;
+  padding: 10px 10px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-plot:hover {
+  background-color: #0056b3;
+}
+
+/* Legend */
+.legend {
+  padding: 5px; /* Smaller padding */
+  border: 1px solid #cccccc;
+  background: #ffffff;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 50px; /* Position at the bottom */
+}
+
+.legend h4 {
+  margin: 0 0 5px; /* Smaller margin */
+  font-size: 14px; /* Smaller font size */
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin: 2px 0;
+}
+
+.legend-color {
+  width: 15px; /* Color box width */
+  height: 15px; /* Color box height */
+  margin-right: 5px; /* Margin */
+  border: 1px solid #000000;
+}
+
+.legend-label {
+  font-size: 12px; /* Smaller font size */
+}
+
+/* Info */
+.info-icon {
+  margin-right: 8px;
+  cursor: pointer;
+  color: #000080;
+}
+
+.info-icon.active {
+  color: #800000;
+}
+
+.explanation {
+  background-color: white;
+  border: 1px solid #CCCCCC;
+  padding: 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  max-width: 500px;
+  text-align: justify;
+  word-wrap: break-word;
+}
+
+/* Date Picker */
+.date-picker {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  margin: 20px;
+}
+
+.date-label {
+  font-weight: bold;
+  margin-right: 10px; 
+  font-size: 14px;    
+  color: #333333;       
+  display: inline-block;
+  width: 50px;       
+  text-align: right; 
+}
+
+.blinking {
+  stroke: red;
+  stroke-width: 2px;
+  fill: none;
+  animation: blink-animation 1s infinite;
+}
+
+@keyframes blink-animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
