@@ -9,15 +9,40 @@ import "../styles.css";
 const plotCSV = 'https://wave-pulse-o5tct.ondigitalocean.app/api/sentiment-plots/';
 const entropyCSV = 'https://wave-pulse-o5tct.ondigitalocean.app/api/entropy/';
 
-// Function to calculate the moving average
-const movingAverage = (data, windowSize) => {
+const movingAverage = (data, dates, windowSize) => {
+    const completeDates = [];
+    const dateToValueMap = {};
+
+    dates.forEach((date, index) => {
+        dateToValueMap[date] = data[index];
+    });
+
+    const startDate = new Date(dates[0]);
+    const endDate = new Date(dates[dates.length - 1]);
+
+    for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
+        const dateString = d.toISOString().split('T')[0];
+        completeDates.push(dateString);
+    }
+
+    const completeData = completeDates.map(date => dateToValueMap[date] || null);
+
     let averages = [];
-    for (let i = 0; i < data.length; i++) {
-        let start = Math.max(0, i - windowSize + 1);
-        let subArray = data.slice(start, i + 1);
-        let Avg = subArray.reduce((a, b) => a + b, 0);
-        let average = Avg / subArray.length;
-        averages.push(parseFloat(average.toFixed(2)));
+    for (let i = 0; i < completeData.length; i++) {
+        let window = completeData.slice(Math.max(0, i - windowSize + 1), i + 1);
+        
+        let validValues = window.filter(value => 
+            value !== null && 
+            value !== undefined && 
+            !isNaN(value)
+        );
+
+        if (validValues.length > 0) {
+            let average = validValues.reduce((a, b) => a + b, 0) / validValues.length;
+            averages.push(parseFloat(average.toFixed(2)));
+        } else {
+            averages.push(null);
+        }
     }
     return averages;
 };
@@ -87,19 +112,22 @@ const SentimentCombined = () => {
         axios.get(plotCSV)
         .then(plotData => {
             const labels = plotData.data.map(d => d.Date);
+            
+            // Convert sentiment values to numbers, preserving exact data
             const bidenData = plotData.data.map(d => +d.Biden_Combined_Sentiment);
             const trumpData = plotData.data.map(d => +d.Trump_Combined_Sentiment);
             const harrisData = plotData.data.map(d => +d.Harris_Combined_Sentiment);
             const democratsData = plotData.data.map(d => +d.Democrats_Combined_Sentiment);
             const republicansData = plotData.data.map(d => +d.Republicans_Combined_Sentiment);
 
-            // Calculate moving averages
-            const windowSize = 3; // Adjust the window size as needed
-            const bidenMA = movingAverage(bidenData, windowSize);
-            const trumpMA = movingAverage(trumpData, windowSize);
-            const harrisMA = movingAverage(harrisData, windowSize);
-            const democratsMA = movingAverage(democratsData, windowSize);
-            const republicansMA = movingAverage(republicansData, windowSize);
+            // Calculate moving averages with improved handling
+            const windowSize = 3;
+            const bidenMA = movingAverage(bidenData, labels, windowSize);
+            const trumpMA = movingAverage(trumpData, labels, windowSize);
+            const harrisMA = movingAverage(harrisData, labels, windowSize);
+            const democratsMA = movingAverage(democratsData, labels, windowSize);
+            const republicansMA = movingAverage(republicansData, labels, windowSize);
+
 
             setChartData({
                 labels: labels,
