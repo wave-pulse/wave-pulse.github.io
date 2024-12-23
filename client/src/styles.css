@@ -31,28 +31,6 @@ svg {
   padding: 1rem;
 }
 
-
-/* About */
-.about-section {
-  text-align: center;
-  justify-content: center;
-  padding: 20px;
-  width: 1000px; 
-  margin: 20px auto; 
-}
-
-.about-section h4 {
-  color: #333333; 
-  font-size: 24px;
-  margin-bottom: 10px; 
-}
-
-.about-section p {
-  color: #666666;
-  font-size: 16px; 
-  line-height: 1.5;
-}
-
 /* Map Elements */
 /* State Styles */
 .state {
@@ -318,4 +296,70 @@ svg {
   100% {
     opacity: 1;
   }
+}
+
+/* About */
+.about-section {
+  text-align: justify;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px auto;
+  text-justify: inter-word;
+  background-color: #E0E2E3;
+  max-width: 1000px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-section p {
+  color: #666666;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.title-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+  color: #333333;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin: 0;
+  color: #555555;
+}
+
+.figcaption {
+  margin-top: 10px;
+  font-size: 15px;
+  color: #555555;
+  text-align: center;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  font-size: 18px;
+  color: #FFFFFF;
+  margin-top: 20px;
+  border-top: 1px solid #DDDDDD;
+  padding-top: 10px;
+}
+
+.footer .author {
+  font-size: 15px;
+  color: #DDDDDD;
+}
+
+.footer .affiliation {
+  font-size: 12px;
+  font-style: italic;
+  color: #DDDDDD;
 }

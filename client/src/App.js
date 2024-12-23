@@ -8,9 +8,8 @@ import {
   IconButton 
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
-import About from "./HomePage/About";
-import Images from "./HomePage/Images";
-import Directions from "./HomePage/Directions";
+import Content from "./HomePage/Content";
+import Footer from "./HomePage/Footer";
 import MapChart from "./MapChart/MapChart";
 import Plots from "./Plots/Plots";
 
@@ -40,7 +39,7 @@ function App() {
             </IconButton>
           )}
           <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Wave Pulse
+            WavePulse
           </Typography>
         </Toolbar>
       </AppBar>
@@ -48,11 +47,12 @@ function App() {
       {/* Home Page */}
       {!showChart ? (
         <>
+          <br/>
+          <div className="title-container">
+            <h1 className="title">WavePulse</h1>
+            <h2 className="subtitle">Real-time Content Analytics of Radio Livestreams</h2>
+          </div>
           <Box textAlign="center" mt={5}>
-            <Typography variant="h4" gutterBottom>
-              Welcome to Wave Pulse
-            </Typography>
-            <About />
             <Box mt={2}>
               <Button
                 variant="contained"
@@ -70,13 +70,13 @@ function App() {
                 Show Daily Average
               </Button>
             </Box>
-          </Box>
+          </Box> 
           <Box mt={5}>
-            <Images />
+            <Content />
           </Box>
-          <Box mt={5}>
-            <Directions />
-          </Box>
+          <AppBar position="static">
+            <Footer />
+          </AppBar>
         </>
       ) : showChart === "map" ? (
         <MapChart />
