@@ -438,8 +438,8 @@ const Content = () => {
                     <figcaption
                         className="text-center mt-2 text-sm text-gray-600"
                         style={{maxWidth: "600px", margin: "0 auto"}}>
-                        A U.S. map showing state-level{" "}
-                        <strong>political sentiment trends</strong> with
+                        A U.S. map showing {" "}
+                        <strong>state-level political sentiment trends</strong> with
                         regional
                         color-coding to visualize geographic patterns.
                     </figcaption>
