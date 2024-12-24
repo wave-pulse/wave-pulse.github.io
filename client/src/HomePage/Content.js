@@ -1,259 +1,528 @@
-import React from 'react';
-import './../styles.css';
-import PipelineImage from './Images/Pipeline.jpg';
-import RadioCoverageImage from './Images/RadioCoverage.jpg';
-import SentimentStatesImage from './Images/SentimentStates.jpg';
-import SocialNetworkImage from './Images/SocialNetwork.jpg';
+import React from "react";
+import "./styles.css";
+import {FileText, Database, Box, Github} from "lucide-react";
+import PipelineImage from "./Images/Pipeline.jpg";
+import RadioCoverageImage from "./Images/RadioCoverage.jpg";
+import SentimentStatesImage from "./Images/SentimentStates.jpg";
+import TranscriptsImage from "./Images/Transcripts.jpg";
+import SilverWavePulseImage from "./Images/SilverWavePulse.jpg";
+import NarrativeTrackerImage from "./Images/NarrativeTracker.jpg";
+import SocialNetworkImage from "./Images/SocialNetwork.jpg";
 
 const Content = () => {
-  return (
-    <div>
+    return (
+        <div>
+            {/* Author Section */}
+            <div
+                className="flex flex-col items-center text-center max-w-4xl mx-auto my-8 space-y-4">
+                <div style={{textAlign: "center", justifyContent: "center"}}>
+                    <div className="text-lg space-y-2">
+                        {/* Authors */}
+                        <div>
+                            <a
+                                href="https://www.linkedin.com/in/mittalgovind/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-500 hover:underline"
+                            >
+                                Govind Mittal
+                            </a>{" "}
+                            <sup>1</sup>, <br/>
+                            <a
+                                href="https://www.linkedin.com/in/sarthak99/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-500 hover:underline"
+                            >
+                                Sarthak Gupta
+                            </a>
+                            <sup>1</sup>,{" "}
+                            <a
+                                href="https://www.linkedin.com/in/shruti-wagle/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-500 hover:underline"
+                            >
+                                Shruti Wagle
+                            </a>
+                            <sup>1</sup>,{" "}
+                            <a
+                                href="https://www.linkedin.com/in/chiragchopra7/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-500 hover:underline"
+                            >
+                                Chirag Chopra
+                            </a>
+                            <sup>1</sup>,{" "}
+                            <a
+                                href="https://demattee.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-500 hover:underline"
+                            >
+                                Anthony J DeMattee
+                            </a>
+                            <sup>2</sup>,{" "}
+                            <a
+                                href="https://engineering.nyu.edu/faculty/nasir-memon"
+                                className="text-blue-500 hover:underline"
+                            >
+                                Nasir Memon
+                            </a>
+                            <sup>1</sup>,{" "}
+                            <a
+                                href="https://www.cc.gatech.edu/people/mustaque-ahamad"
+                                className="text-blue-500 hover:underline"
+                            >
+                                Mustaque Ahamad
+                            </a>
+                            <sup>3</sup>, <br/>
+                            <a
+                                href="https://chinmayhegde.github.io/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-500 hover:underline"
+                            >
+                                Chinmay Hegde
+                            </a>
+                            <sup>1</sup>
+                        </div>
+                    </div>
+                    {/* Affiliations */}
+                    <div
+                        className="text-sm italic"
+                        style={{textAlign: "center", justifyContent: "center"}}
+                    >
+                        <div>
+                            <sup>1</sup>New York University, Tandon School of
+                            Engineering,
+                            Brooklyn, NY, USA
+                        </div>
+                        <div>
+                            <sup>2</sup>The Carter Center, Atlanta, GA, USA
+                        </div>
+                        <div>
+                            <sup>3</sup>Georgia Institute of Technology,
+                            Atlanta, GA, USA
+                        </div>
+                    </div>
+                </div>
+                {/* Buttons */}
+                <div style={{textAlign: "center", justifyContent: "center"}}>
+                    <div className="flex space-x-14 mt-4">
+                        <a
+                            href="https://arxiv.org/"
+                            className="flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+                        >
+                            <FileText size={20}/>
+                            <span>Paper</span>
+                        </a>
+                        <a
+                            href="https://huggingface.co/datasets/nyu-dice-lab/wave-pulse-transcripts"
+                            className="flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+                        >
+                            <Database size={20}/>
+                            <span>Data</span>
+                        </a>
+                        <a
+                            href="https://github.com/NYU-DICE-Lab/WavePulse"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+                        >
+                            <Github size={20}/>
+                            <span>Code</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-        <div className="about-section">
-            <h2 style={{ color: "#333333", textAlign: "center" }}>
-                Abstract
-            </h2>
+            <td style={{textAlign: "center", padding: "40px"}}>
+                <figure>
+                    <img
+                        src={PipelineImage}
+                        alt="Pipeline"
+                        style={{
+                            width: "100%",
+                            height: "auto",
+                            margin: "0 auto"
+                        }}
+                    />
+                </figure>
+            </td>
 
-            <div>
+            <div className="about-section">
+                <div>
+                    <p>
+                        Radio remains a pervasive medium for mass information
+                        dissemination,
+                        with AM/FM stations reaching more Americans than either
+                        smartphone-based social networking or live television.
+                    </p>
+                    <p>
+                        We present WavePulse, a framework
+                        that <strong>records</strong>,{" "}
+                        <strong>documents</strong>, and{" "}
+                        <strong>analyzes live-streamed radio content in
+                            real-time</strong>.
+                        We use WavePulse to monitor livestreams of 396 news
+                        radio stations
+                        over a period of three months, processing close to
+                        500,000 hours of
+                        audio streams.
+                    </p>
+                </div>
+            </div>
+
+            <td
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "20px",
+                }}
+            >
+                <figure style={{textAlign: "center"}}>
+                    <img
+                        src={RadioCoverageImage}
+                        alt="Radio Coverage"
+                        style={{
+                            width: "100%",
+                            height: "auto",
+                            maxWidth: "600px",
+                            margin: "0 auto",
+                        }}
+                    />
+                    <figcaption
+                        className="text-center mt-2 text-sm text-gray-600">
+                        Our Coverage of Radio Stations
+                    </figcaption>
+                </figure>
+            </td>
+
+            <div className="about-section">
                 <p>
-                Radio remains a pervasive medium for mass information dissemination,
-                with AM/FM stations reaching more Americans than either smartphone-based social networking or live television.
-                Increasingly, radio broadcasts are also streamed online and accessed over the Internet.
+                    We <strong>transcribed</strong>, <strong>diarized</strong>,
+                    <strong>summarized</strong> speech into{" "}
+                    <strong>a dataset of Nation Wide Radio transcripts</strong>.
                 </p>
+            </div>
+            <td
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "20px",
+                }}
+            >
+                <figure style={{textAlign: "center"}}>
+                    <img
+                        src={TranscriptsImage}
+                        alt="Transcripts"
+                        style={{
+                            width: "100%",
+                            height: "auto",
+                            maxWidth: "600px",
+                            margin: "0 auto",
+                        }}
+                    />
+                </figure>
+            </td>
+            <br/>
+
+            <div className="about-section">
+                <h2 style={{color: "#333333", textAlign: "center"}}>
+                    Case Study #1: Tracking Spread of a Political Narrative
+                </h2>
+
                 <p>
-                We present <strong>WavePulse</strong>, a framework that records, documents, and analyzes radio content in real-time.
-                While our framework is generally applicable, we showcase the efficacy of WavePulse in a collaborative project
-                with a team of political scientists focusing on the 2024 Presidential Elections. We use WavePulse to monitor
-                livestreams of 396 news radio stations over a period of three months, processing close to 500,000 hours of audio streams.
+                    We collaborated with the Carter Center which studies
+                    election
+                    integrity and tried to identify the provenance of a very
+                    specific
+                    rumor concerning the legitimacy of the 2020 Presidential
+                    Election.
+                    WavePulse enabled us to{" "}
+                    <strong>identify positive matches for this rumor and track
+                        it</strong>{" "}
+                    across the US over a period of several months.
                 </p>
+            </div>
+
+            <td
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "20px",
+                }}
+            >
+                <figure style={{textAlign: "center"}}>
+                    <img
+                        src={NarrativeTrackerImage}
+                        alt="NarrativeTracker"
+                        style={{
+                            width: "100%",
+                            height: "auto",
+                            maxWidth: "1000px",
+                            margin: "0 auto",
+                        }}
+                    />
+
+                    <figcaption
+                        className="text-center mt-2 text-sm text-gray-600">
+                        # Narrative-Specific Mentions, either neutral
+                        reporting, debunking
+                        or promoting, encoded in the color and size of bubbles.
+                    </figcaption>
+                </figure>
+            </td>
+
+            <div className="about-section">
+                <h2 style={{color: "#333333", textAlign: "center"}}>
+                    Case Study #2: Content Syndication
+                </h2>
+
                 <p>
-                These streams were converted into time-stamped, diarized transcripts and analyzed to track answer key political science
-                questions at both the national and state levels. Our analysis revealed how local issues interacted with national trends,
-                providing insights into information flow. Our results demonstrate WavePulse's efficacy in capturing and analyzing content
-                from radio livestreams sourced from the Web.
+                    We examined <strong>content syndication across radio
+                    stations</strong>{" "}
+                    using transcript matching and hashing techniques to build
+                    a{" "}
+                    <strong>"radio syndication graph,"</strong> that revealed
+                    coordinated
+                    messaging strategies and has implications for media
+                    diversity
+                    analysis.
+                </p>
+            </div>
+            <td style={{textAlign: "center", padding: "10px"}}>
+                <figure>
+                    <img
+                        src={SocialNetworkImage}
+                        alt="Radio Station Network"
+                        style={{width: "600px", height: "auto"}}
+                    />
+                    <figcaption
+                        className="text-center mt-2 text-sm text-gray-600">
+                        From 22,149 initial content groups, we identified 1,776
+                        connected
+                        subgroups with 2,684 unique station-to-station
+                        connections. Key
+                        findings include 15 major hub stations, a 10-station
+                        regional
+                        network, and content propagation chains where stories
+                        travel between
+                        states over time. Edges not shown for clarity.
+                    </figcaption>
+                </figure>
+            </td>
+
+            <div className="about-section">
+                <h2 style={{color: "#333333", textAlign: "center"}}>
+                    Case Study #3: Presidential Candidates' Favorability
+                    Trends{" "}
+                </h2>
+
+                <p>
+                    The researchers conducted{" "}
+                    <strong>NLP-based sentiment analysis</strong> on
+                    presidential
+                    candidate mentions in radio transcripts, converting them
+                    into time
+                    series data. By analyzing{" "}
+                    <strong>both national and state-level trends</strong>, they
+                    discovered
+                    their passive radio sentiment tracking{" "}
+                    <strong>closely matched traditional polling data</strong>.
+                    This
+                    suggests WavePulse provides a viable complementary method
+                    for
+                    monitoring public opinion through web-accessible radio
+                    content.
+                </p>
+            </div>
+
+            <td
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "20px",
+                }}
+            >
+                <figure style={{textAlign: "center"}}>
+                    <img
+                        src={SilverWavePulseImage}
+                        alt="SilverWavePulse"
+                        style={{
+                            width: "100%",
+                            height: "auto",
+                            maxWidth: "600px",
+                            margin: "0 auto",
+                        }}
+                    />
+                    <figcaption
+                        className="text-center mt-2 text-sm text-gray-600">
+                        A dual-panel visualization comparing polling and radio
+                        sentiment
+                        data from July-September 2024. The top panel shows{" "}
+                        <strong>traditional polling averages</strong> for Trump
+                        and Harris
+                        from the{" "}
+                        <a
+                            href="https://www.natesilver.net/p/nate-silver-2024-president-election-polls-model"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Silver Bulletin
+                        </a>
+                        , while the bottom displays{" "}
+                        <strong>radio-derived sentiment scores</strong> using a
+                        7-day
+                        average. A notable spike occurs in Harris's sentiment
+                        when Biden
+                        withdrew.
+                    </figcaption>
+                </figure>
+            </td>
+
+            <td
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "20px",
+                }}
+            >
+                <figure style={{textAlign: "center"}}>
+                    <img
+                        src={SentimentStatesImage}
+                        alt="Sentiment Trends by State"
+                        style={{
+                            width: "100%",
+                            height: "auto",
+                            maxWidth: "600px",
+                            margin: "0 auto",
+                        }}
+                    />
+                    <figcaption
+                        className="text-center mt-2 text-sm text-gray-600">
+                        A U.S. map showing state-level{" "}
+                        <strong>political sentiment trends</strong> with
+                        regional
+                        color-coding to visualize geographic patterns.
+                    </figcaption>
+                </figure>
+            </td>
+            <div className="about-section">
+                <h2 style={{color: "#333333", textAlign: "center"}}>
+                    Wave-Pulse.io Navigation Guide
+                </h2>
+
+                <p>
+                    Welcome to <strong>Wave Pulse</strong>, our integrated
+                    platform for
+                    analyzing radio content patterns and sentiment trends
+                    across the
+                    United States. This guide outlines the key features and
+                    navigation
+                    tools available to you.
+                </p>
+
+                <p>
+                    <strong>Interactive Map Visualization</strong>
+                    <br/>
+                    Access our comprehensive map interface by selecting{" "}
+                    <strong>"Show Map"</strong>. Through the <strong>"Select
+                    Map"</strong>{" "}
+                    dropdown, you can explore multiple visualization modes:
+                </p>
+
+                <p>
+                    - <strong>State Party - Relative</strong>: View
+                    proportional party
+                    sentiment analysis
+                    <br/>- <strong>State Party - Absolute</strong>: Examine raw
+                    party
+                    sentiment data
+                    <br/>- <strong>State Candidate - Relative</strong>: Study
+                    proportional candidate sentiment trends
+                    <br/>- <strong>State Candidate - Absolute</strong>: Review
+                    raw
+                    candidate sentiment metrics
+                </p>
+
+                <p>
+                    <strong>Data Enhancement Options</strong>
+                    <br/>
+                    Augment your visualization with additional data layers
+                    using the{" "}
+                    <strong>"Select Overlay"</strong> menu:
+                </p>
+
+                <p>
+                    - <strong>Radio Coverage</strong>: Examine broadcast reach
+                    and
+                    penetration
+                    <br/>- <strong>Population Distribution</strong>: View
+                    demographic
+                    density patterns
+                    <br/>- <strong>County Boundaries</strong>: Add detailed
+                    geographic
+                    delineation
+                </p>
+
+                <p>
+                    <strong>Narrative Analytics</strong>
+                    <br/>
+                    Through the <strong>"Select Narrative"</strong> dropdown,
+                    access
+                    focused analytical views such as the 'Georgia Election
+                    Stolen'
+                    analysis. For clarity and precision, the system displays
+                    one narrative
+                    analysis at a time.
+                </p>
+
+                <p>
+                    <strong>Trend Analysis</strong>
+                    <br/>
+                    Access detailed temporal analysis through the{" "}
+                    <strong>"Show Daily Average"</strong> feature, which
+                    provides
+                    comprehensive charts and summaries of data patterns over
+                    time.
+                </p>
+
+                <p>
+                    <strong>Navigation</strong>
+                    <br/>
+                    The <strong>Home</strong> icon in the top-left corner
+                    serves as your
+                    anchor point, allowing you to return to the Home Page at
+                    any time. As
+                    you navigate through different views and analyses, the
+                    system provides
+                    confirmation notifications to acknowledge your selections.
+                </p>
+
+                <p>
+                    This interface design prioritizes efficient access to our
+                    analytical
+                    tools while maintaining intuitive navigation through the
+                    platform's
+                    comprehensive feature set. Each visualization and analysis
+                    option has
+                    been carefully structured to provide maximum insight with
+                    minimal
+                    complexity.
                 </p>
             </div>
         </div>
-
-        <div className="about-section">
-            <h2 style={{ color: "#333333", textAlign: "center" }}>
-                Directions for Navigating Wave Pulse
-            </h2>
-
-            <p >
-                Welcome to <strong>Wave Pulse</strong>! This platform provides an
-                intuitive way to explore data through geographical visualizations and
-                analytical charts. Upon loading the website, you will arrive at the{" "}
-                <strong>Home Page</strong>. Here, you’ll be greeted with a welcome
-                message and an introduction in the <strong>About</strong> section,
-                which gives you insights into the purpose and functionality of Wave
-                Pulse.
-            </p>
-            <p>To explore the platform, click on:</p>
-
-            <p>
-                <strong>"Show Map"</strong> to view an <strong>interactive map</strong> of
-                state and county-level data.
-            </p>
-
-            <p>
-                Use the <strong>"Select Map"</strong> dropdown to choose:
-                - <strong>State Party - Relative</strong>: Relative sentiment by party. <br />
-                - <strong>State Party - Absolute</strong>: Absolute counts by party. <br />
-                - <strong>State Candidate - Relative</strong>: Relative sentiment by candidate. <br />
-                - <strong>State Candidate - Absolute</strong>: Absolute counts by candidate.
-            </p>
-
-            <p>
-                Use the <strong>"Select Overlay"</strong> dropdown to toggle:
-                - <strong>Show Coverage</strong>: Displays radio coverage. <br />
-                - <strong>Show Population</strong>: Highlights population data. <br />
-                - <strong>Show County Map</strong>: Adds county boundaries.
-            </p>
-
-            <p>
-                Use the <strong>"Select Narrative"</strong> dropdown to display specific
-                narratives like <strong>'Georgia Election Stolen'</strong>. Only one
-                narrative can be active at a time.
-                <br />
-                <strong>"Show Daily Average"</strong> displays analytical charts and plots
-                summarizing daily trends in the data.
-                <br />
-                When you are viewing either the <strong>Map</strong> or the{" "}
-                <strong>Daily Average</strong> chart, you can always return to the{" "}
-                <strong>Home Page</strong> by clicking the <strong>Home</strong> icon
-                in the top-left corner.
-                <br />
-                Enjoy exploring the rich features of Wave Pulse, and use the map and
-                overlays to gain detailed insights into state and candidate-level
-                data. Toast notifications will confirm changes as you explore.
-            </p>
-        </div>
-
-        <table style={{ width: '50%', margin: '0 auto', borderCollapse: 'collapse' }}>
-            <tbody>
-            <tr>
-                <td style={{ textAlign: 'center', padding: '10px' }}>
-                <figure>
-                    <img 
-                    src={PipelineImage} 
-                    alt="Pipeline" 
-                    style={{ width: '600px', height: 'auto' }} 
-                    />
-                    <figcaption className="figcaption">
-                    A flowchart illustrating the WavePulse system's workflow. 
-                    It includes components for radio streaming, audio processing (speech recognition and speaker diarization), content classification (categorizing into political, apolitical, ads, or news/discussion), and analytics (such as tracking political trends, matching fact-checks, and constructing a social network of radio stations). 
-                    The pipeline emphasizes the integration of AI-driven tools for comprehensive radio content analysis.
-                    </figcaption>
-                </figure>
-                </td>
-                <td style={{ textAlign: 'center', padding: '10px' }}>
-                <figure>
-                    <img 
-                    src={RadioCoverageImage} 
-                    alt="Radio Coverage" 
-                    style={{ width: '600px', height: 'auto' }} 
-                    />
-                    <figcaption className="figcaption">
-                    A U.S. map displaying the geographic distribution of AM, FM, and News/Talk radio stations. 
-                    Red dots indicate News/Talk stations, while other colored markers represent AM, FM, and other station types. 
-                    The map showcases the concentration of stations across different states, with notable density in urban and highly populated regions.
-                    </figcaption>
-                </figure>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div className="about-section">
-            <h2 style={{ color: "#333333", textAlign: "center" }}>
-                Introduction
-            </h2>
-
-            <p>
-                This paper introduces WavePulse, an end-to-end system for real-time acquisition, transcription, speaker diarization, curation, and content analysis of up to several hundreds of radio livestreams sourced from URL's accessible via the Web. 
-                The key feature of WavePulse is that most of the system components are built using powerful AI tools such as modern, multimodal large language models (LLMs) which have witnessed significant advances in 2024. 
-                This feature enables rapid design and deployment, and showcases AI's potential as a valuable tool for worldwide broadcast media analysis. 
-                </p>
-
-                <p>
-                We report our findings from a pilot deployment of WavePulse that encompassed 396 AM/FM radio streams spanning all 50 US states, where we placed a strong emphasis on political news broadcasts recorded continuously over a 100-day period from late June to late September 2024. 
-                This time period captures a significant period of American political history, which included pivotal events such as controversial debates, two assassination attempts on a presidential candidate, an unexpected campaign withdrawal by the sitting US President, and several other key political milestones.  
-
-                <ul>
-                <li>
-                <strong>Monitoring narratives and rumors: </strong> 
-                In our first case study, we collaborated with a team of political scientists studying election integrity and trying to identify the provenance of a very specific rumor concerning the legitimacy of the 2020 Presidential Election (which continues to echo through the political discourse 4 years later). 
-                Our system enabled us to identify positive matches for this rumor and track it across the US over a period of several months.
-                </li>
-                <li>
-                <strong>Understanding content syndication patterns: </strong> 
-                In our second case study, we study content syndication across geographically dispersed radio stations. 
-                Using techniques from transcript de-duplication and hashing-based matching, we construct a virtual “radio syndication graph” and find communities/clusters in this graph that frequently mirror each others' (sometimes even niche) content. 
-                Such tools can potentially be used to study nationwide media diversity and analyze longitudinal information spread.
-                </li>
-                <li>
-                <strong>Measuring political trends: </strong> 
-                In our third case study, we perform NLP-based sentiment analysis of chunks of transcripts related to specific candidates in the US Presidential Election, curate them into scalar time series, and visualize national and state-wise trends over given time periods. 
-                Remarkably, we find that our sentiment scores (gathered in a purely passive manner) mirror national polling trends, showing that WavePulse can be used as a supplementary tool for tracking public opinion over the web.
-                </li>
-            </ul>
-            </p>
-        </div>
-
-        <br /> 
-
-        <div className="about-section">
-            <h2 style={{ color: "#333333", textAlign: "center" }}>
-                Our Contributions
-            </h2>
-
-            <p>
-            <ul>
-                <li>
-                An end-to-end framework for recording, transcribing, and performing analytics on the radio.
-                </li>
-                <li>
-                A data pipeline to convert raw transcripts into their rich counterparts by time-stamping, diarizing, summarizing, and classifying into ads, news, discussion, and ancillary content.
-                </li>
-                <li>
-                Rich analysis, including topic modeling to distill top emerging narratives, and sentiment analysis to gauge political temperament across the United States, stratified by state and time interval.
-                </li>
-                <li>
-                Three case studies, stemming from a collaboration with a non-profit center for monitoring election integrity.
-                </li>
-                <li>
-                A self-updating interactive website for our analytics.
-                </li>
-            </ul>
-            </p>
-        </div>
-
-        <table style={{ width: '50%', margin: '0 auto', borderCollapse: 'collapse' }}>
-            <tbody>
-            <tr>
-                <td style={{ textAlign: 'center', padding: '10px' }}>
-                <figure>
-                    <img 
-                    src={SentimentStatesImage} 
-                    alt="Sentiment Trends by State" 
-                    style={{ width: '600px', height: 'auto' }} 
-                    />
-                    <figcaption className="figcaption">
-                    A U.S. map displaying sentiment trends across states during a specific political period. 
-                    Each state has a small plot visualizing sentiment data, with trends for Democratic ("D") and Republican ("R") support. 
-                    The color-coded regions represent different U.S. geographical divisions, such as Pacific, Midwest, and Southern, providing insights into political sentiment variations across states.
-                    </figcaption>
-                </figure>
-                </td>
-                <td style={{ textAlign: 'center', padding: '10px' }}>
-                <figure>
-                    <img 
-                    src={SocialNetworkImage} 
-                    alt="Radio Station Network" 
-                    style={{ width: '600px', height: 'auto' }} 
-                    />
-                    <figcaption className="figcaption">
-                    A map visualizing the connections between radio stations across the U.S., based on content syndication patterns during a specific timeframe. 
-                    Dots represent radio stations, with colors indicating their level of connectivity (e.g., red for less than 8 connections, yellow for 8-15 connections, blue for more than 15 connections). 
-                    Lines between stations highlight syndication links, forming a network graph of radio content distribution.
-                    </figcaption>
-                </figure>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div className="about-section">
-            <h2 style={{ color: "#333333", textAlign: "center" }}>
-                Conclusion
-            </h2>
-
-            <p>
-                Our analysis does not incorporate population data along with the reach of each station's waves to calculate exposure to each station. 
-                Nielsen Audio sells exposure ratings, and the FCC hosts ground conductivity data. 
-                We also included only stations that are livestreamed over the Internet. 
-                Terrestrial-only radio broadcasts would require dedicated hardware, such as an antenna, transceiver, and recording equipment.
-            </p>
-            <p>
-                Finally, while WavePulse is widely applicable, our analysis derives results and conclusions from only U.S. radios. 
-                An important direction of future work is to broaden the scope to worldwide radio livestreams. 
-                Due to the multilingual nature of LLMs, we anticipate our system can scale up with no significant design changes.
-            </p>
-            <p>
-                While we are confident about WavePulse's scalability and error rates, our analyses should be considered within the context of case studies. 
-                A comprehensive evaluation would require interdisciplinary collaboration and usage-based assessment. 
-                Our case studies demonstrate a non-exhaustive variant of general-purpose tasks, including search, finding syndicate networks, and sentiment analysis, that WavePulse can perform.
-            </p>
-            <p>
-                We introduce WavePulse, an end-to-end pipeline for gathering and analyzing live-stream radio broadcasts, which can increasingly be accessed via the Web. 
-                Using this system, we collected nearly half a million hours of news/talk radio content over a 100-day period of significant political activity in the United States. 
-                We conducted three case studies: tracking political narratives with political scientists, building a social network of radio stations, and predicting political trends in real-time. 
-                Our findings highlight the depth of insights derivable from WavePulse's comprehensive dataset.
-            </p>
-        </div>
-    </div>
-  );
+    );
 };
 
 export default Content;

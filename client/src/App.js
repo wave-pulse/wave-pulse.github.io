@@ -74,9 +74,6 @@ function App() {
           <Box mt={5}>
             <Content />
           </Box>
-          <AppBar position="static">
-            <Footer />
-          </AppBar>
         </>
       ) : showChart === "map" ? (
         <MapChart />
