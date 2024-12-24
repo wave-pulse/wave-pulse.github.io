@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.css";
+import "../styles.css";
 import {FileText, Database, Box, Github} from "lucide-react";
 import PipelineImage from "./Images/Pipeline.jpg";
 import RadioCoverageImage from "./Images/RadioCoverage.jpg";
