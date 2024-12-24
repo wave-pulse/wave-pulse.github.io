@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles.css";
-import {FileText, Database, Box, Github} from "lucide-react";
+import {FileText, Database, Github} from "lucide-react";
 import PipelineImage from "./Images/Pipeline.jpg";
 import RadioCoverageImage from "./Images/RadioCoverage.jpg";
 import SentimentStatesImage from "./Images/SentimentStates.jpg";
@@ -21,8 +21,6 @@ const Content = () => {
                         <div>
                             <a
                                 href="https://www.linkedin.com/in/mittalgovind/"
-                                target="_blank"
-                                rel="noopener noreferrer"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-blue-500 hover:underline"
