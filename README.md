@@ -21,3 +21,4 @@ Install dependencies: npm install
 Start the development server (default host http://localhost:3000): npm start
 
 Production server: https://wave-pulse.io
+
