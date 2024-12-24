@@ -52,6 +52,9 @@ function App() {
             <h1 className="title">WavePulse</h1>
             <h2 className="subtitle">Real-time Content Analytics of Radio Livestreams</h2>
           </div>
+          <Box mt={5}>
+            <Content />
+          </Box>
           <Box textAlign="center" mt={5}>
             <Box mt={2}>
               <Button
@@ -71,9 +74,7 @@ function App() {
               </Button>
             </Box>
           </Box> 
-          <Box mt={5}>
-            <Content />
-          </Box>
+
         </>
       ) : showChart === "map" ? (
         <MapChart />
