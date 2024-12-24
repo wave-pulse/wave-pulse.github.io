@@ -9,7 +9,6 @@ import {
 } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import Content from "./HomePage/Content";
-import Footer from "./HomePage/Footer";
 import MapChart from "./MapChart/MapChart";
 import Plots from "./Plots/Plots";
 

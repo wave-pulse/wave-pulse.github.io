@@ -342,24 +342,3 @@ svg {
   color: #555555;
   text-align: center;
 }
-
-/* Footer */
-.footer {
-  text-align: center;
-  font-size: 18px;
-  color: #FFFFFF;
-  margin-top: 20px;
-  border-top: 1px solid #DDDDDD;
-  padding-top: 10px;
-}
-
-.footer .author {
-  font-size: 15px;
-  color: #DDDDDD;
-}
-
-.footer .affiliation {
-  font-size: 12px;
-  font-style: italic;
-  color: #DDDDDD;
-}
