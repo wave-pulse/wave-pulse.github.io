@@ -146,6 +146,7 @@ const Content = () => {
                         style={{
                             width: "100%",
                             height: "auto",
+                            maxWidth: "750px",
                             margin: "0 auto"
                         }}
                     />
@@ -195,7 +196,8 @@ const Content = () => {
                         }}
                     />
                     <figcaption
-                        className="text-center mt-2 text-sm text-gray-600">
+                        className="text-center mt-2 text-sm text-gray-600"
+                    style={{ maxWidth: "600px", margin: "0 auto" }}>
                         Our Coverage of Radio Stations
                     </figcaption>
                 </figure>
@@ -304,7 +306,8 @@ const Content = () => {
                         style={{width: "600px", height: "auto"}}
                     />
                     <figcaption
-                        className="text-center mt-2 text-sm text-gray-600">
+                        className="text-center mt-2 text-sm text-gray-600"
+                        style={{maxWidth: "600px", margin: "0 auto"}}>
                         From 22,149 initial content groups, we identified 1,776
                         connected
                         subgroups with 2,684 unique station-to-station
@@ -363,7 +366,8 @@ const Content = () => {
                         }}
                     />
                     <figcaption
-                        className="text-center mt-2 text-sm text-gray-600">
+                        className="text-center mt-2 text-sm text-gray-600"
+                        style={{maxWidth: "600px", margin: "0 auto"}}>
                         A dual-panel visualization comparing polling and radio
                         sentiment
                         data from July-September 2024. The top panel shows{" "}
@@ -407,7 +411,8 @@ const Content = () => {
                         }}
                     />
                     <figcaption
-                        className="text-center mt-2 text-sm text-gray-600">
+                        className="text-center mt-2 text-sm text-gray-600"
+                        style={{maxWidth: "600px", margin: "0 auto"}}>
                         A U.S. map showing state-level{" "}
                         <strong>political sentiment trends</strong> with
                         regional
