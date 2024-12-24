@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.284927f3.css",
-    "main.js": "/static/js/main.5952a282.js",
+    "main.css": "/static/css/main.9af428d9.css",
+    "main.js": "/static/js/main.c3e4859d.js",
     "static/media/Pipeline.jpg": "/static/media/Pipeline.cd9f9ba1f65ffa16b700.jpg",
     "static/media/SentimentStates.jpg": "/static/media/SentimentStates.813189e07c24708ca401.jpg",
     "static/media/RadioCoverage.jpg": "/static/media/RadioCoverage.5afb7be29c91dfcc0633.jpg",
@@ -10,11 +10,11 @@
     "static/media/SocialNetwork.jpg": "/static/media/SocialNetwork.be9551726a3dd4a30e85.jpg",
     "static/media/SilverWavePulse.jpg": "/static/media/SilverWavePulse.0d5d1ee5540d3b0b7e21.jpg",
     "index.html": "/index.html",
-    "main.284927f3.css.map": "/static/css/main.284927f3.css.map",
-    "main.5952a282.js.map": "/static/js/main.5952a282.js.map"
+    "main.9af428d9.css.map": "/static/css/main.9af428d9.css.map",
+    "main.c3e4859d.js.map": "/static/js/main.c3e4859d.js.map"
   },
   "entrypoints": [
-    "static/css/main.284927f3.css",
-    "static/js/main.5952a282.js"
+    "static/css/main.9af428d9.css",
+    "static/js/main.c3e4859d.js"
   ]
 }
