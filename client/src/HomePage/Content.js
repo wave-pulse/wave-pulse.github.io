@@ -138,51 +138,59 @@ const Content = () => {
                 </div>
             </div>
 
-            <td
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: "20px",
-                }}
-            >
-                <figure style={{textAlign: "center"}}>
-                    <img
-                        src={PipelineImage}
-                        alt="Pipeline"
-                        style={{
-                            width: "100%",
-                            height: "auto",
-                            maxWidth: "600px",
-                            margin: "0 auto",
-                        }}
-                    />
-                </figure>
-            </td>
+            <div className="content-wrapper">
+                <td
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        padding: "20px",
+                        width: "100%",
+                    }}
+                >
+                    <figure style={{
+                        textAlign: "center",
+                        width: "100%",
+                        margin: 0,
+                    }}>
+                        <img
+                            src={PipelineImage}
+                            alt="Pipeline"
+                            style={{
+                                width: "100%",
+                                height: "auto",
+                                margin: "0 auto",
+                            }}
+                        />
+                    </figure>
+                </td>
 
-            <div className="about-section">
-                <div>
-                    <p>
-                        Radio remains a pervasive medium for mass information
-                        dissemination,
-                        with AM/FM stations reaching more Americans than either
-                        smartphone-based social networking or live television.
-                    </p>
-                    <p>
-                        We present WavePulse, a framework
-                        that <strong>records</strong>,{" "}
-                        <strong>documents</strong>, and{" "}
-                        <strong>analyzes live-streamed radio content in
-                            real-time</strong>.
-                        We use WavePulse to monitor livestreams of 396 news
-                        radio stations
-                        over a period of three months, processing close to
-                        500,000 hours of
-                        audio streams.
-                    </p>
+                <div className="about-section">
+                    <div>
+                        <p>
+                            Radio remains a pervasive medium for mass
+                            information
+                            dissemination,
+                            with AM/FM stations reaching more Americans than
+                            either
+                            smartphone-based social networking or live
+                            television.
+                        </p>
+                        <p>
+                            We present WavePulse, a framework
+                            that <strong>records</strong>,{" "}
+                            <strong>documents</strong>, and{" "}
+                            <strong>analyzes live-streamed radio content in
+                                real-time</strong>.
+                            We use WavePulse to monitor livestreams of 396 news
+                            radio stations
+                            over a period of three months, processing close to
+                            500,000 hours of
+                            audio streams.
+                        </p>
+                    </div>
                 </div>
             </div>
-
             <td
                 style={{
                     display: "flex",

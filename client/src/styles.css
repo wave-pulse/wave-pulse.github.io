@@ -341,3 +341,9 @@ svg {
   color: #555555;
   text-align: center;
 }
+
+.content-wrapper {
+    max-width: 1000px;  /* or whatever width your text content uses */
+    margin: 0 auto;
+    padding: 0 20px;
+}
