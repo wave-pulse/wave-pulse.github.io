@@ -138,16 +138,23 @@ const Content = () => {
                 </div>
             </div>
 
-            <td style={{textAlign: "center", padding: "40px"}}>
-                <figure>
+            <td
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "20px",
+                }}
+            >
+                <figure style={{textAlign: "center"}}>
                     <img
                         src={PipelineImage}
                         alt="Pipeline"
                         style={{
                             width: "100%",
                             height: "auto",
-                            maxWidth: "750px",
-                            margin: "0 auto"
+                            maxWidth: "600px",
+                            margin: "0 auto",
                         }}
                     />
                 </figure>
@@ -197,7 +204,7 @@ const Content = () => {
                     />
                     <figcaption
                         className="text-center mt-2 text-sm text-gray-600"
-                    style={{ maxWidth: "600px", margin: "0 auto" }}>
+                        style={{maxWidth: "600px", margin: "0 auto"}}>
                         Our Coverage of Radio Stations
                     </figcaption>
                 </figure>
@@ -298,31 +305,41 @@ const Content = () => {
                     analysis.
                 </p>
             </div>
-            <td style={{textAlign: "center", padding: "10px"}}>
-                <figure>
-                    <img
-                        src={SocialNetworkImage}
-                        alt="Radio Station Network"
-                        style={{width: "600px", height: "auto"}}
-                    />
-                    <figcaption
-                        className="text-center mt-2 text-sm text-gray-600"
-                        style={{maxWidth: "600px", margin: "0 auto"}}>
-                        From 22,149 initial content groups, we identified 1,776
-                        connected
-                        subgroups with 2,684 unique station-to-station
-                        connections. Key
-                        findings include 15 major hub stations, a 10-station
-                        regional
-                        network, and content propagation chains where stories
-                        travel between
-                        states over time. Edges not shown for clarity.
-                    </figcaption>
-                </figure>
-            </td>
 
-            <div className="about-section">
-                <h2 style={{color: "#333333", textAlign: "center"}}>
+
+
+        <td
+            style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: "20px",
+            }}
+        >
+            <figure>
+                <img
+                    src={SocialNetworkImage}
+                    alt="Radio Station Network"
+                    style={{width: "600px", height: "auto"}}
+                />
+                <figcaption
+                    className="text-center mt-2 text-sm text-gray-600"
+                    style={{maxWidth: "600px", margin: "0 auto"}}>
+                    From 22,149 initial content groups, we identified 1,776
+                    connected
+                    subgroups with 2,684 unique station-to-station
+                    connections. Key
+                    findings include 15 major hub stations, a 10-station
+                    regional
+                    network, and content propagation chains where stories
+                    travel between
+                    states over time. Edges not shown for clarity.
+                </figcaption>
+            </figure>
+        </td>
+
+    <div className="about-section">
+    <h2 style={{color: "#333333", textAlign: "center"}}>
                     Case Study #3: Presidential Candidates' Favorability
                     Trends{" "}
                 </h2>

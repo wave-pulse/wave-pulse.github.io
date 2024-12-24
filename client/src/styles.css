@@ -7,9 +7,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #f1f3f4;
+  background-color: #ffffff;
 }
-
 svg {
   display: inline-block;
   vertical-align: middle;
@@ -18,23 +17,23 @@ svg {
 
 /* Page Containers */
 .app-container {
-  background-color: #f1f3f4; 
+  background-color: #f1f3f4;
 }
 
 .map-container {
-  background-color: #ADD8E6; 
+  background-color: #add8e6;
   padding: 1rem;
 }
 
 .plots-container {
-  background-color: #f1f3f4; 
+  background-color: #f1f3f4;
   padding: 1rem;
 }
 
 /* Map Elements */
 /* State Styles */
 .state {
-  stroke: #000000; 
+  stroke: #000000;
   stroke-width: 0.3;
 }
 
@@ -45,7 +44,7 @@ svg {
 }
 
 .state-label-rect {
-  fill: #FFFFFF;
+  fill: #ffffff;
   stroke: #000000;
   stroke-width: 0.5;
   rx: 4;
@@ -55,18 +54,18 @@ svg {
 
 /* County Styles */
 .county {
-  stroke: #FFFFFF; 
+  stroke: #ffffff;
   stroke-width: 0.2;
 }
 
 .county.hover {
- fill: #333333; 
+  fill: #333333;
 }
 
 /* Marker Styles */
 .marker {
-  fill: #3b3b3b; 
-  transition: r 0.3s ease;  
+  fill: #3b3b3b;
+  transition: r 0.3s ease;
 }
 
 .coverage {
@@ -76,62 +75,62 @@ svg {
 }
 
 .population {
-  fill: #FFF000; 
-  transition: r 0.3s ease; 
+  fill: #fff000;
+  transition: r 0.3s ease;
 }
 
 /* Tooltip Styles */
 .radio-tooltip {
-  fill: #000000; 
+  fill: #000000;
   font-size: 8px;
   font-weight: bold;
   padding-left: 10px;
 }
 
 .radio-tooltip-background {
-  fill: #f5f5f5;           
-  stroke: #e0e0e0;          
-  opacity: 0.95;            
-  rx: 8;                  
+  fill: #f5f5f5;
+  stroke: #e0e0e0;
+  opacity: 0.95;
+  rx: 8;
   ry: 8;
-  padding: 8px;             
+  padding: 8px;
 }
 
 .marker-tooltip {
   position: fixed;
-  fill: 000000; 
-  font-size: 12px;  
+  fill: 000000;
+  font-size: 12px;
   font-weight: bold;
 }
 
 .marker-tooltip-background {
   position: fixed;
-  fill: #f5f5f5;           
-  stroke: #e0e0e0;          
-  opacity: 0.95;            
-  rx: 8;                  
+  fill: #f5f5f5;
+  stroke: #e0e0e0;
+  opacity: 0.95;
+  rx: 8;
   ry: 8;
-  padding: 8px;        
+  padding: 8px;
 }
 
 .county-tooltip {
   background-color: #000000;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 5px;
   font-size: 12px;
   border-radius: 3px;
-  rx: 5;  
+  rx: 5;
   ry: 5;
 }
 
 .data-tooltip {
   background-color: #000000;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 5px;
   font-size: 16px;
   border-radius: 3px;
-  rx: 10;  
-  ry: 10; 
+  rx: 10;
+  ry: 10;
 }
 
 /* Button for map */
@@ -140,7 +139,7 @@ svg {
   bottom: 20px;
   right: 50px;
   padding: 10px 10px;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -195,7 +194,7 @@ svg {
   bottom: 20px;
   right: 50px;
   padding: 10px 10px;
-  background-color: #007BFF;
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -251,7 +250,7 @@ svg {
 
 .explanation {
   background-color: white;
-  border: 1px solid #CCCCCC;
+  border: 1px solid #cccccc;
   padding: 8px;
   font-size: 12px;
   border-radius: 4px;
@@ -271,12 +270,12 @@ svg {
 
 .date-label {
   font-weight: bold;
-  margin-right: 10px; 
-  font-size: 14px;    
-  color: #333333;       
+  margin-right: 10px;
+  font-size: 14px;
+  color: #333333;
   display: inline-block;
-  width: 50px;       
-  text-align: right; 
+  width: 50px;
+  text-align: right;
 }
 
 .blinking {
@@ -305,15 +304,15 @@ svg {
   padding: 20px;
   margin: 20px auto;
   text-justify: inter-word;
-  background-color: #E0E2E3;
+  background-color: #e0e2e3;
   max-width: 1000px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .about-section p {
-  color: #666666;
-  font-size: 16px;
+  color: #333333;
+  font-size: 19px;
   line-height: 1.5;
 }
 
