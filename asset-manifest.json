@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.9af428d9.css",
+    "main.css": "/static/css/main.ce063d08.css",
     "main.js": "/static/js/main.c3e4859d.js",
     "static/media/Pipeline.jpg": "/static/media/Pipeline.cd9f9ba1f65ffa16b700.jpg",
     "static/media/SentimentStates.jpg": "/static/media/SentimentStates.813189e07c24708ca401.jpg",
@@ -10,11 +10,11 @@
     "static/media/SocialNetwork.jpg": "/static/media/SocialNetwork.be9551726a3dd4a30e85.jpg",
     "static/media/SilverWavePulse.jpg": "/static/media/SilverWavePulse.0d5d1ee5540d3b0b7e21.jpg",
     "index.html": "/index.html",
-    "main.9af428d9.css.map": "/static/css/main.9af428d9.css.map",
+    "main.ce063d08.css.map": "/static/css/main.ce063d08.css.map",
     "main.c3e4859d.js.map": "/static/js/main.c3e4859d.js.map"
   },
   "entrypoints": [
-    "static/css/main.9af428d9.css",
+    "static/css/main.ce063d08.css",
     "static/js/main.c3e4859d.js"
   ]
 }
