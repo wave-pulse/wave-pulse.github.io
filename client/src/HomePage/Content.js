@@ -112,7 +112,7 @@ const Content = () => {
                 <div style={{textAlign: "center", justifyContent: "center"}}>
                     <div className="flex space-x-14 mt-4">
                         <a
-                            href="https://arxiv.org/"
+                            href="https://arxiv.org/abs/2412.17998"
                             className="flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
                         >
                             <FileText size={20}/>
