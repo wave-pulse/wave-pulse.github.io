@@ -119,7 +119,7 @@ const Content = () => {
                             <span>Paper</span>
                         </a>
                         <a
-                            href="https://huggingface.co/datasets/nyu-dice-lab/wave-pulse-transcripts"
+                            href="https://huggingface.co/datasets/nyu-dice-lab/wavepulse-radio-summarized-transcripts"
                             className="flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
                         >
                             <Database size={20}/>
