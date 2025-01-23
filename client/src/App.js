@@ -50,7 +50,8 @@ function App() {
           <div className="title-container">
             <h1 className="title">WavePulse</h1>
             <h2 className="subtitle">Real-time Content Analytics of Radio Livestreams</h2>
-            <h3 className="subtitle">To Appear at The Web Conference (WWW) 2025</h3>
+            <h3 className="subtitle text-sm italic">To Appear at The Web Conference (WWW) 2025</h3>
+
 
           </div>
           <Box mt={5}>
