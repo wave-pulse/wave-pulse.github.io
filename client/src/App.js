@@ -41,7 +41,7 @@ function App() {
       }
     };
     fetchFilters();
-  }, []);
+  }, [API]);
 
   const handleSearch = async () => {
     try { 
