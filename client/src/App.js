@@ -15,6 +15,8 @@ import MapChart from "./MapChart/MapChart";
 import Plots from "./Plots/Plots";
 
 function App() {
+  const API = process.env.REACT_APP_BACKEND_URL;
+
   const [showChart, setShowChart] = useState(null);
   const [q, setQ] = useState("");
   const [station, setStation] = useState("");
@@ -27,8 +29,6 @@ function App() {
   const [showModal, setShowModal] = useState(false);
   const [stationOptions, setStationOptions] = useState([]);
   const [stateOptions, setStateOptions] = useState([]);
-
-  const API = process.env.REACT_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -44,7 +44,7 @@ function App() {
   }, []);
 
   const handleSearch = async () => {
-    try {
+    try { 
       const params = { q, station, state, speaker, startDate, endDate };
       const response = await axios.get(`${API}/search`, {
         params,
