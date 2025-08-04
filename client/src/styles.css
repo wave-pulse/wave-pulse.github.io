@@ -347,3 +347,29 @@ svg {
     margin: 0 auto;
     padding: 0 20px;
 }
+
+
+/*Search modal*/
+.app-container .search_modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 10%;
+  right: 0;
+  max-width: 80%;
+  background: "rgba(0,0,0,0.4)";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-container .Search_modal_window {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 700px;
+  max-height: 610px;
+  overflow-y: auto;
+  border: solid #4444;
+}
