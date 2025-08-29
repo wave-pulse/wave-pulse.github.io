@@ -4,7 +4,7 @@ import axios from "axios";
 //import Papa from "papaparse";
 import TimeHistogram from "./TimeHistogram";
 import "./styles.css";
-import { maxTime } from "date-fns/constants";
+//import { maxTime } from "date-fns/constants";
 
 const API = process.env.REACT_APP_BACKEND_URL || "http://localhost:2000";
 
