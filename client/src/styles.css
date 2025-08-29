@@ -350,26 +350,15 @@ svg {
 
 
 /*Search modal*/
-.app-container .search_modal {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 10%;
-  right: 0;
-  max-width: 80%;
-  background: "rgba(0,0,0,0.4)";
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.segment-scroll-wrapper {
+  max-height: none;
+  overflow-y: hidden;
+  transition: max-height 0.3s ease;
 }
 
-.app-container .Search_modal_window {
-  background: white;
-  padding: 40px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 700px;
-  max-height: 610px;
+.scroll-enabled {
+  max-height: 400px; /* or whatever fits well */
   overflow-y: auto;
-  border: solid #4444;
+  border: 1px solid #ddd;
+  padding-right: 10px;
 }
