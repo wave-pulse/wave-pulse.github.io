@@ -1,4 +1,3 @@
-// TimeHistogram.js - includes export buttons for PNG via html2canvas
 import React, { useEffect, useRef, useState } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import axios from 'axios';
@@ -27,7 +26,7 @@ ChartJS.register(
   Legend
 );
 
-const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:2000';
+const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
 
 const TimeHistogram = ({ filters }) => {
   const [timeData, setTimeData] = useState(null);
@@ -127,7 +126,7 @@ const TimeHistogram = ({ filters }) => {
             />
           </div>
           <button onClick={() => downloadChartAsImage(timeChartRef, 'time_chart.png')} style={{ marginTop: '10px' }}>
-            Download Time Chart as PNG
+            Download
           </button>
         </div>
       ) : (
@@ -158,7 +157,7 @@ const TimeHistogram = ({ filters }) => {
             />
           </div>
           <button onClick={() => downloadChartAsImage(stationChartRef, 'station_chart.png')} style={{ marginTop: '10px' }}>
-            Download Station Chart as PNG
+            Download
           </button>
         </div>
       ) : (
