@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.15020865.css",
-    "main.js": "/static/js/main.503da21b.js",
+    "main.css": "/static/css/main.189c12e0.css",
+    "main.js": "/static/js/main.8551fe3b.js",
     "static/media/Pipeline.jpg": "/static/media/Pipeline.cd9f9ba1f65ffa16b700.jpg",
     "static/media/SentimentStates.jpg": "/static/media/SentimentStates.813189e07c24708ca401.jpg",
     "static/media/RadioCoverage.jpg": "/static/media/RadioCoverage.5afb7be29c91dfcc0633.jpg",
@@ -10,11 +10,11 @@
     "static/media/SocialNetwork.jpg": "/static/media/SocialNetwork.be9551726a3dd4a30e85.jpg",
     "static/media/SilverWavePulse.jpg": "/static/media/SilverWavePulse.0d5d1ee5540d3b0b7e21.jpg",
     "index.html": "/index.html",
-    "main.15020865.css.map": "/static/css/main.15020865.css.map",
-    "main.503da21b.js.map": "/static/js/main.503da21b.js.map"
+    "main.189c12e0.css.map": "/static/css/main.189c12e0.css.map",
+    "main.8551fe3b.js.map": "/static/js/main.8551fe3b.js.map"
   },
   "entrypoints": [
-    "static/css/main.15020865.css",
-    "static/js/main.503da21b.js"
+    "static/css/main.189c12e0.css",
+    "static/js/main.8551fe3b.js"
   ]
 }
