@@ -1,17 +1,237 @@
-// SearchPage.js with backend-based sorting support
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-//import Papa from "papaparse";
 import TimeHistogram from "./TimeHistogram";
-import "./styles.css";
-//import { maxTime } from "date-fns/constants";
+import "./searchPage.css"; 
 
-const API = process.env.REACT_APP_BACKEND_URL || "http://localhost:2000";
+// --- API Configuration ---
+const API = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+
+// Search UI Components
+const SearchableMultiSelectDropdown = ({
+  label,
+  options,
+  selectedOptions,
+  setSelectedOptions,
+}) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+        setSearchTerm("");
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const toggleOption = (option) => {
+    if (selectedOptions.includes(option)) {
+      setSelectedOptions(selectedOptions.filter((o) => o !== option));
+    } else {
+      setSelectedOptions([...selectedOptions, option]);
+    }
+  };
+
+  const filteredOptions = options.filter(
+    (option) =>
+      option.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      !selectedOptions.includes(option)
+  );
+
+  return (
+    <div className="form-group" ref={dropdownRef}>
+      <label>{label}</label>
+      <div className="multiselect-container">
+        <div className="multiselect-control" onClick={() => setIsOpen(!isOpen)}>
+          <div className="selected-pills">
+            {selectedOptions.length > 0 ? (
+              selectedOptions.map((option) => (
+                <div key={option} className="selected-pill">
+                  {option}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleOption(option);
+                    }}
+                    className="pill-remove-btn"
+                  >
+                    &times;
+                  </button>
+                </div>
+              ))
+            ) : (
+              <span className="multiselect-placeholder">Select {label}...</span>
+            )}
+          </div>
+          <span className="multiselect-arrow">{isOpen ? "▲" : "▼"}</span>
+        </div>
+        {isOpen && (
+          <ul className="multiselect-options">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="multiselect-search-input"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              autoFocus
+            />
+            {filteredOptions.length > 0 ? (
+              filteredOptions.map((option) => (
+                <li key={option} onClick={() => toggleOption(option)}>
+                  {option}
+                </li>
+              ))
+            ) : (
+              <li className="no-options">No options found</li>
+            )}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const MultiInputField = ({ label, placeholder, inputs, setInputs }) => {
+  const addField = () => setInputs([...inputs, ""]);
+  const removeField = (index) => {
+    if (inputs.length > 0) {
+      setInputs(inputs.filter((_, i) => i !== index));
+    }
+  };
+  const updateField = (index, value) => {
+    const updated = [...inputs];
+    updated[index] = value;
+    setInputs(updated);
+  };
+
+  return (
+    <div className="form-group">
+      <label>{label}</label>
+      {inputs.map((value, index) => (
+        <div key={index} className="input-row">
+          <input
+            type="text"
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => updateField(index, e.target.value)}
+            className="input-field"
+          />
+          <button
+            type="button"
+            onClick={() => removeField(index)}
+            className="btn-remove"
+          >
+            −
+          </button>
+        </div>
+      ))}
+      <button type="button" onClick={addField} className="btn-add">
+        + Add {label}
+      </button>
+    </div>
+  );
+};
+
+const ContextSegment = ({ segment }) => (
+  <div className="context-segment">
+    <p className="context-segment-meta">
+      {segment.speaker} (
+      {new Date(segment.dt || segment.datetime).toLocaleString()})
+    </p>
+    <p className="context-segment-text">{segment.text || segment.snippet}</p>
+  </div>
+);
+
+const SearchResultCard = ({
+  result,
+  contextMap,
+  fetchContext,
+  removeContext,
+}) => {
+  const hasBefore = contextMap[result.id]?.before?.length > 0;
+  const hasAfter = contextMap[result.id]?.after?.length > 0;
+
+  return (
+    <div className="result-card">
+      <div className="result-card-header">
+        <h3>
+          {result.speaker} – {result.station}
+        </h3>
+        <div className="result-card-meta">
+          <p>{new Date(result.datetime).toLocaleString()}</p>
+          <p>Rank: {result.rank.toFixed(5)}</p>
+        </div>
+      </div>
+
+      {hasBefore && (
+        <div className="context-container">
+          {contextMap[result.id].before.map((seg) => (
+            <ContextSegment key={seg.id} segment={seg} />
+          ))}
+        </div>
+      )}
+
+      <p className="result-snippet">{result.snippet}</p>
+
+      {hasAfter && (
+        <div className="context-container">
+          {contextMap[result.id].after.map((seg) => (
+            <ContextSegment key={seg.id} segment={seg} />
+          ))}
+        </div>
+      )}
+
+      <div className="result-card-actions">
+        <div className="context-buttons">
+          <button
+            onClick={() => fetchContext(result.id, "before")}
+            className="btn btn-small"
+          >
+            Before
+          </button>
+          <button
+            onClick={() => fetchContext(result.id, "after")}
+            className="btn btn-small"
+          >
+            After
+          </button>
+        </div>
+        {(hasBefore || hasAfter) && (
+          <div className="clear-buttons">
+            {hasBefore && (
+              <button
+                onClick={() => removeContext(result.id, "before")}
+                className="btn-clear"
+              >
+                Clear Before
+              </button>
+            )}
+            {hasAfter && (
+              <button
+                onClick={() => removeContext(result.id, "after")}
+                className="btn-clear"
+              >
+                Clear After
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 function SearchPage() {
   const [queryInputs, setQueryInputs] = useState([""]);
-  const [stationInputs, setStationInputs] = useState([""]);
-  const [stateInputs, setStateInputs] = useState([""]);
+  const [stationInputs, setStationInputs] = useState([]);
+  const [stateInputs, setStateInputs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [speakerInputs, setSpeakerInputs] = useState([""]);
@@ -29,6 +249,7 @@ function SearchPage() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [snippets, setSnippets] = useState([]);
+  const [searched, setSearched] = useState(false);
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -46,6 +267,7 @@ function SearchPage() {
   const handleSearch = async (page = 1) => {
     setLoading(true);
     setError(null);
+    setSearched(true);
 
     try {
       const params = {
@@ -72,27 +294,6 @@ function SearchPage() {
       setLoading(false);
     }
   };
-
-  /*const handleAsk = async () => {
-    setLoading(true);
-    setAnswer("");
-
-    try {
-      const res = await fetch("/ask", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ question }),
-      });
-      setAnswer(res.data.answer);
-    } catch (err) {
-      console.error(err);
-      setAnswer("Error retrieving answer.");
-    }
-
-    setLoading(false);
-  };*/
 
   const removeContext = (id, direction) => {
     setContextMap((prev) => ({
@@ -133,7 +334,6 @@ function SearchPage() {
 
   const handleExportCSV = async () => {
     try {
-      // Build context map
       const contextRequested = Object.entries(contextMap).reduce(
         (acc, [id, segments]) => {
           acc[id] = {
@@ -144,8 +344,6 @@ function SearchPage() {
         },
         {}
       );
-
-      // Send POST to backend with filters and context map
       const response = await fetch(`${API}/export_csv`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -162,10 +360,8 @@ function SearchPage() {
           contextRequested,
         }),
       });
-
       if (!response.ok) throw new Error("CSV export failed");
       const blob = await response.blob();
-
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
@@ -184,12 +380,9 @@ function SearchPage() {
     setAnswer("");
     setSnippets([]);
     setError("");
-
     console.log("Question asked:", question);
-  
     try {
       const trimmed = question.trim().toLowerCase();
-  
       if (trimmed.includes("election")) {
         setAnswer("Ranked choice voting allows voters to rank candidates.");
         setSnippets([
@@ -205,7 +398,9 @@ function SearchPage() {
           },
         ]);
       } else if (trimmed.includes("climate")) {
-        setAnswer("Climate change is discussed frequently in political coverage.");
+        setAnswer(
+          "Climate change is discussed frequently in political coverage."
+        );
         setSnippets([
           {
             speaker: "Rep. Green",
@@ -224,65 +419,6 @@ function SearchPage() {
       setLoading(false);
     }
   };
-  
-
-  const renderInputList = (
-    label,
-    inputs,
-    setInputs,
-    options = [],
-    isDropdown = false
-  ) => (
-    <div className="mb-3">
-      <label className="form-label">{label}</label>
-      {inputs.map((val, idx) => (
-        <div key={idx} className="input-group mb-2">
-          {isDropdown ? (
-            <select
-              className="form-select"
-              value={val}
-              onChange={(e) => {
-                const updated = [...inputs];
-                updated[idx] = e.target.value;
-                setInputs(updated);
-              }}
-            >
-              <option value="">Select {label}</option>
-              {options.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
-          ) : (
-            <input
-              type="text"
-              className="form-control"
-              value={val}
-              placeholder={`Enter ${label.toLowerCase()}...`}
-              onChange={(e) => {
-                const updated = [...inputs];
-                updated[idx] = e.target.value;
-                setInputs(updated);
-              }}
-            />
-          )}
-          <button
-            className="btn btn-outline-danger"
-            onClick={() => setInputs(inputs.filter((_, i) => i !== idx))}
-          >
-            −
-          </button>
-        </div>
-      ))}
-      <button
-        className="btn btn-outline-primary"
-        onClick={() => setInputs([...inputs, ""])}
-      >
-        + Add {label}
-      </button>
-    </div>
-  );
 
   const histogramFilters = {
     q: queryInputs.filter(Boolean).join("|"),
@@ -293,361 +429,251 @@ function SearchPage() {
     endDate,
   };
 
+  const renderPagination = () => {
+    if (count <= resultsPerPage) return null;
+
+    const totalPages = Math.ceil(count / resultsPerPage);
+    const maxVisible = 5;
+    const currentBlock = Math.floor((currentPage - 1) / maxVisible);
+    const startPage = currentBlock * maxVisible + 1;
+    const endPage = Math.min(startPage + maxVisible - 1, totalPages);
+
+    const pages = [];
+
+    if (currentBlock > 0) {
+      pages.push(
+        <button
+          key="first"
+          onClick={() => handleSearch(1)}
+          className="pagination-button"
+        >
+          &laquo; First
+        </button>
+      );
+      pages.push(
+        <button
+          key="prev"
+          onClick={() => handleSearch(startPage - 1)}
+          className="pagination-button"
+        >
+          &lsaquo; Prev
+        </button>
+      );
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={() => handleSearch(i)}
+          className={`pagination-button ${currentPage === i ? "active" : ""}`}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    if (endPage < totalPages) {
+      pages.push(
+        <button
+          key="next"
+          onClick={() => handleSearch(endPage + 1)}
+          className="pagination-button"
+        >
+          Next &rsaquo;
+        </button>
+      );
+      pages.push(
+        <button
+          key="last"
+          onClick={() => handleSearch(totalPages)}
+          className="pagination-button"
+        >
+          Last &raquo;
+        </button>
+      );
+    }
+
+    return <div className="pagination-container">{pages}</div>;
+  };
+
   return (
-    <div className="container mt-5">
-      <div className="form-check form-switch mb-4">
-        <input
-          className="form-check-input"
-          type="checkbox"
-          id="toggleMode"
-          checked={isAskMode}
-          onChange={() => setIsAskMode(!isAskMode)}
-        />
-        <label className="form-check-label" htmlFor="toggleMode">
-          {isAskMode ? "Switch to Search Mode" : "Switch to Ask Mode"}
-        </label>
-      </div>
+    <div className="search-page-container">
+      <div className="main-content">
+        <header className="page-header">
+          <h1 className="page-title">Transcript Search</h1>
+          <div className="toggle-mode-container">
+            <span>Switch to {isAskMode ? "Search" : "Ask"} Mode</span>
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={isAskMode}
+                onChange={() => setIsAskMode(!isAskMode)}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
+        </header>
 
-      {isAskMode ? (
-        <div className="mb-4">
-          <h3>Ask a Question</h3>
-          <input
-            type="text"
-            className="form-control mb-2"
-            placeholder="Type your question..."
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-          />
-          <button className="btn btn-primary" onClick={handleAsk}>
-            Ask
-          </button>
+        {isAskMode ? (
+          <div className="card">
+            <h2 className="card-title">Ask a Question</h2>
+            <div className="ask-input-group">
+              <input
+                type="text"
+                className="input-field"
+                placeholder="Type your question..."
+                value={question}
+                onChange={(e) => setQuestion(e.target.value)}
+              />
+              <button onClick={handleAsk} className="btn btn-primary">
+                Ask
+              </button>
+            </div>
 
-          {loading && (
-            <div className="text-center my-3">
-              <div className="spinner-border text-primary" role="status">
-                <span className="visually-hidden">Loading...</span>
+            {loading && <div className="loading-indicator">Loading...</div>}
+            {error && <div className="error-message">{error}</div>}
+
+            {answer && (
+              <div className="answer-container">
+                <h5>Answer:</h5>
+                <p>{answer}</p>
               </div>
-            </div>
-          )}
-
-          {error && (
-            <div className="alert alert-danger mt-3" role="alert">
-              {error}
-            </div>
-          )}
-
-          {answer && (
-            <div className="alert alert-success mt-4">
-              <h5 className="mb-2">Answer:</h5>
-              <p>{answer}</p>
-            </div>
-          )}
-
-          {snippets.length > 0 && (
-            <div className="mt-4">
-              <h6>Related Transcripts</h6>
-              {snippets.map((s, idx) => (
-                <div key={idx} className="border p-2 mb-2 bg-light">
-                  <strong>{s.speaker}</strong> (
-                  {new Date(s.date).toLocaleString()})
-                  <br />
-                  {s.text}
-                </div>
-              ))}
-            </div>
-          )}
-
-          {!answer && !loading && question.trim() && (
-            <div className="alert alert-warning mt-3">
-              Sorry, we couldn’t find an answer to your question.
-            </div>
-          )}
-        </div>
-      ) : (
-        <div>
-          <h2 className="mb-4">Transcript Search</h2>
-
-          {renderInputList("Keyword", queryInputs, setQueryInputs)}
-          {renderInputList(
-            "Station",
-            stationInputs,
-            setStationInputs,
-            stationOptions,
-            true
-          )}
-          {renderInputList(
-            "State",
-            stateInputs,
-            setStateInputs,
-            stateOptions,
-            true
-          )}
-          {renderInputList("Speaker", speakerInputs, setSpeakerInputs)}
-
-          <div className="row mb-4">
-            <div className="col-md-6">
-              <label className="form-label">From Date:</label>
-              <input
-                type="date"
-                className="form-control"
-                value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6">
-              <label className="form-label">To Date:</label>
-              <input
-                type="date"
-                className="form-control"
-                value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-              />
-            </div>
+            )}
+            {snippets.length > 0 && (
+              <div className="snippets-container">
+                <h6>Related Transcripts</h6>
+                {snippets.map((s, idx) => (
+                  <ContextSegment key={idx} segment={s} />
+                ))}
+              </div>
+            )}
           </div>
-
-          <div className="mb-3 d-flex align-items-center gap-2">
-            <label className="form-label mb-0">Sort by date:</label>
-            <select
-              className="form-select w-auto"
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-            >
-              <option value="desc">Recent to Old</option>
-              <option value="asc">Old to Recent</option>
-            </select>
-          </div>
-
-          <div className="mb-4 d-flex gap-3">
-            <button className="btn btn-primary" onClick={() => handleSearch(1)}>
-              Search
-            </button>
-            <button className="btn btn-secondary" onClick={handleExportCSV}>
-              Export CSV
-            </button>
-          </div>
-
-          {count > 0 && (
-            <div className="mb-4">
-              <TimeHistogram filters={histogramFilters} />
-            </div>
-          )}
-          {/* <div>
-      <h2>Ask a Question</h2>
-      <input
-        type="text"
-        value={question}
-        onChange={(e) => setQuestion(e.target.value)}
-        placeholder="Enter your question"
-      />
-      <button onClick={handleAsk}>Ask</button>
-
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        answer && <div><strong>Answer:</strong> {answer}</div>
-      )}
-    </div>*/}
-          {!loading && results.length === 0 && (
-            <div className="alert alert-warning" role="alert">
-              No results found. Try different filters or keywords.
-            </div>
-          )}
-
-          <h4>Search Results</h4>
-          <p>Total: {count}</p>
-
-          <div className="row">
-            {results.map((r) => (
-              <div className="col-md-6 mb-4" key={r.id}>
-                <div className="card h-100 shadow-sm">
-                  <div className="card-body">
-                    <div
-                      style={{
-                        maxHeight:
-                          contextMap[r.id]?.before?.length ||
-                          contextMap[r.id]?.after?.length
-                            ? "400px"
-                            : "none",
-                        overflowY:
-                          contextMap[r.id]?.before?.length ||
-                          contextMap[r.id]?.after?.length
-                            ? "auto"
-                            : "hidden",
-                        border:
-                          contextMap[r.id]?.before?.length ||
-                          contextMap[r.id]?.after?.length
-                            ? "1px solid #ddd"
-                            : "none",
-                        paddingRight: "10px",
-                        transition: "max-height 0.3s ease",
-                        padding: "10px",
-                      }}
-                    >
-                      {/* Before Segments */}
-                      {contextMap[r.id]?.before?.length > 0 && (
-                        <div className="mb-3">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <h6 className="text-muted mb-0">Segments Before</h6>
-                            <button
-                              className="btn btn-sm btn-outline-danger"
-                              onClick={() => removeContext(r.id, "before")}
-                            >
-                              Remove
-                            </button>
-                          </div>
-                          <hr />
-                          {contextMap[r.id].before.map((seg) => (
-                            <div
-                              key={seg.id}
-                              className="border p-2 mb-2 bg-light"
-                            >
-                              <strong>{seg.speaker}</strong> (
-                              {new Date(seg.dt).toLocaleString()})<br />
-                              {seg.text}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-
-                      {/* Main Segment */}
-                      <h6 className="card-title mb-2">
-                        {r.speaker} – {r.station}
-                      </h6>
-                      <p className="text-muted mb-1">
-                        <small>{new Date(r.datetime).toLocaleString()}</small>
-                      </p>
-                      <p className="card-text">{r.snippet}</p>
-                      <p className="text-muted">
-                        <small>Rank: {r.rank.toFixed(5)}</small>
-                      </p>
-
-                      {/* Buttons */}
-                      <div className="d-flex gap-2 my-2">
-                        <button
-                          className="btn btn-sm btn-outline-secondary"
-                          onClick={() => fetchContext(r.id, "before")}
-                        >
-                          − Before
-                        </button>
-                        <button
-                          className="btn btn-sm btn-outline-secondary"
-                          onClick={() => fetchContext(r.id, "after")}
-                        >
-                          + After
-                        </button>
-                      </div>
-
-                      {/* After Segments */}
-                      {contextMap[r.id]?.after?.length > 0 && (
-                        <div className="mt-3">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <h6 className="text-muted mb-0">Segments After</h6>
-                            <button
-                              className="btn btn-sm btn-outline-danger"
-                              onClick={() => removeContext(r.id, "after")}
-                            >
-                              Remove
-                            </button>
-                          </div>
-                          <hr />
-                          {contextMap[r.id].after.map((seg) => (
-                            <div
-                              key={seg.id}
-                              className="border p-2 mb-2 bg-light"
-                            >
-                              <strong>{seg.speaker}</strong> (
-                              {new Date(seg.dt).toLocaleString()})<br />
-                              {seg.text}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+        ) : (
+          <>
+            <div className="card">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSearch(1);
+                }}
+              >
+                <div className="form-grid">
+                  <MultiInputField
+                    label="Keyword"
+                    placeholder="Enter keyword..."
+                    inputs={queryInputs}
+                    setInputs={setQueryInputs}
+                  />
+                  <SearchableMultiSelectDropdown
+                    label="Station"
+                    options={stationOptions}
+                    selectedOptions={stationInputs}
+                    setSelectedOptions={setStationInputs}
+                  />
+                  <SearchableMultiSelectDropdown
+                    label="State"
+                    options={stateOptions}
+                    selectedOptions={stateInputs}
+                    setSelectedOptions={setStateInputs}
+                  />
+                  <MultiInputField
+                    label="Speaker"
+                    placeholder="Enter speaker..."
+                    inputs={speakerInputs}
+                    setInputs={setSpeakerInputs}
+                  />
+                  <div className="form-group">
+                    <label>From Date</label>
+                    <input
+                      type="date"
+                      value={startDate}
+                      onChange={(e) => setStartDate(e.target.value)}
+                      className="input-field"
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label>To Date</label>
+                    <input
+                      type="date"
+                      value={endDate}
+                      onChange={(e) => setEndDate(e.target.value)}
+                      className="input-field"
+                    />
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          {count > resultsPerPage &&
-            (() => {
-              const totalPages = Math.ceil(count / resultsPerPage);
-              const maxVisible = 5;
-              const currentBlock = Math.floor((currentPage - 1) / maxVisible);
-              const startPage = currentBlock * maxVisible + 1;
-              const endPage = Math.min(startPage + maxVisible - 1, totalPages);
-
-              const pages = [];
-
-              if (currentBlock > 0) {
-                pages.push(
-                  <li key="first" className="page-item">
-                    <button
-                      className="page-link"
-                      onClick={() => handleSearch(1)}
+                <div className="form-actions">
+                  <div className="sort-control">
+                    <label>Sort by:</label>
+                    <select
+                      value={sortOrder}
+                      onChange={(e) => setSortOrder(e.target.value)}
+                      className="select-field"
                     >
-                      « First
+                      <option value="desc">Recent to Old</option>
+                      <option value="asc">Old to Recent</option>
+                    </select>
+                  </div>
+                  <div className="action-buttons">
+                    <button type="submit" className="btn btn-primary">
+                      Search
                     </button>
-                  </li>
-                );
-                pages.push(
-                  <li key="prev" className="page-item">
                     <button
-                      className="page-link"
-                      onClick={() => handleSearch(startPage - 1)}
+                      type="button"
+                      onClick={handleExportCSV}
+                      className="btn btn-secondary"
                     >
-                      ‹ Prev
+                      Export CSV
                     </button>
-                  </li>
-                );
-              }
+                  </div>
+                </div>
+              </form>
+            </div>
 
-              for (let i = startPage; i <= endPage; i++) {
-                pages.push(
-                  <li
-                    key={i}
-                    className={`page-item ${currentPage === i ? "active" : ""}`}
-                  >
-                    <button
-                      className="page-link"
-                      onClick={() => handleSearch(i)}
-                    >
-                      {i}
-                    </button>
-                  </li>
-                );
-              }
+            {loading && <div className="loading-indicator">Searching...</div>}
 
-              if (endPage < totalPages) {
-                pages.push(
-                  <li key="next" className="page-item">
-                    <button
-                      className="page-link"
-                      onClick={() => handleSearch(endPage + 1)}
-                    >
-                      Next ›
-                    </button>
-                  </li>
-                );
-                pages.push(
-                  <li key="last" className="page-item">
-                    <button
-                      className="page-link"
-                      onClick={() => handleSearch(totalPages)}
-                    >
-                      Last »
-                    </button>
-                  </li>
-                );
-              }
+            {searched && !loading && (
+              <>
+                {count > 0 && (
+                  <div className="card">
+                      <h2 className="card-title">Transcript Matches Over Time & By Stations</h2>
+                      <TimeHistogram filters={histogramFilters} />
+                  </div>
+                )}
+                <div className="card">
+                  <div id="search-results">
+                    <div className="results-header">
+                      <h2>Search Results</h2>
+                      <span>Total: {count}</span>
+                    </div>
 
-              return (
-                <nav className="mt-4">
-                  <ul className="pagination flex-wrap">{pages}</ul>
-                </nav>
-              );
-            })()}
-        </div>
-      )}
+                    {results.length > 0 ? (
+                      <div className="results-grid">
+                        {results.map((result) => (
+                          <SearchResultCard
+                            key={result.id}
+                            result={result}
+                            contextMap={contextMap}
+                            fetchContext={fetchContext}
+                            removeContext={removeContext}
+                          />
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="no-results-message">
+                        <p>
+                          No results found. Try different filters or keywords.
+                        </p>
+                      </div>
+                    )}
+                    {renderPagination()}
+                  </div>
+                </div>
+              </>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 }
