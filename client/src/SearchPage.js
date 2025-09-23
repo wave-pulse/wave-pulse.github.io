@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import TimeHistogram from "./TimeHistogram";
-import "./searchPage.css"; 
+import ComparisionGraph from "./ComparisionGraph";
+import "./searchPage.css";
 
 // --- API Configuration ---
 const API = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
@@ -246,10 +247,14 @@ function SearchPage() {
   const [sortOrder, setSortOrder] = useState("desc");
   const resultsPerPage = 20;
   const [isAskMode, setIsAskMode] = useState(false);
+  const [showComparison, setShowComparison] = useState(false);
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [snippets, setSnippets] = useState([]);
   const [searched, setSearched] = useState(false);
+  const [keywordGroups, setKeywordGroups] = useState([
+    { label: "Group A", keywords: [""] },
+  ]);
 
   useEffect(() => {
     const fetchFilters = async () => {
@@ -502,16 +507,30 @@ function SearchPage() {
       <div className="main-content">
         <header className="page-header">
           <h1 className="page-title">Transcript Search</h1>
-          <div className="toggle-mode-container">
-            <span>Switch to {isAskMode ? "Search" : "Ask"} Mode</span>
-            <label className="switch">
-              <input
-                type="checkbox"
-                checked={isAskMode}
-                onChange={() => setIsAskMode(!isAskMode)}
-              />
-              <span className="slider round"></span>
-            </label>
+          <div className="toggle-mode-container d-flex gap-3 align-items-center">
+            <button
+              className={`btn ${
+                showComparison ? "btn-primary" : "btn-outline-primary"
+              }`}
+              onClick={() => {
+                setShowComparison(!showComparison);
+                setIsAskMode(false);
+              }}
+            >
+              Comparison Graph
+            </button>
+
+            <button
+              className={`btn ${
+                isAskMode ? "btn-primary" : "btn-outline-primary"
+              }`}
+              onClick={() => {
+                setIsAskMode(!isAskMode);
+                setShowComparison(false);
+              }}
+            >
+              Ask a Question
+            </button>
           </div>
         </header>
 
@@ -551,124 +570,221 @@ function SearchPage() {
           </div>
         ) : (
           <>
-            <div className="card">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  handleSearch(1);
-                }}
-              >
-                <div className="form-grid">
-                  <MultiInputField
-                    label="Keyword"
-                    placeholder="Enter keyword..."
-                    inputs={queryInputs}
-                    setInputs={setQueryInputs}
-                  />
-                  <SearchableMultiSelectDropdown
-                    label="Station"
-                    options={stationOptions}
-                    selectedOptions={stationInputs}
-                    setSelectedOptions={setStationInputs}
-                  />
-                  <SearchableMultiSelectDropdown
-                    label="State"
-                    options={stateOptions}
-                    selectedOptions={stateInputs}
-                    setSelectedOptions={setStateInputs}
-                  />
-                  <MultiInputField
-                    label="Speaker"
-                    placeholder="Enter speaker..."
-                    inputs={speakerInputs}
-                    setInputs={setSpeakerInputs}
-                  />
-                  <div className="form-group">
-                    <label>From Date</label>
-                    <input
-                      type="date"
-                      value={startDate}
-                      onChange={(e) => setStartDate(e.target.value)}
-                      className="input-field"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label>To Date</label>
-                    <input
-                      type="date"
-                      value={endDate}
-                      onChange={(e) => setEndDate(e.target.value)}
-                      className="input-field"
-                    />
-                  </div>
-                </div>
-                <div className="form-actions">
-                  <div className="sort-control">
-                    <label>Sort by:</label>
-                    <select
-                      value={sortOrder}
-                      onChange={(e) => setSortOrder(e.target.value)}
-                      className="select-field"
-                    >
-                      <option value="desc">Recent to Old</option>
-                      <option value="asc">Old to Recent</option>
-                    </select>
-                  </div>
-                  <div className="action-buttons">
-                    <button type="submit" className="btn btn-primary">
-                      Search
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleExportCSV}
-                      className="btn btn-secondary"
-                    >
-                      Export CSV
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-
-            {loading && <div className="loading-indicator">Searching...</div>}
-
-            {searched && !loading && (
-              <>
-                {count > 0 && (
-                  <div className="card">
-                      <h2 className="card-title">Transcript Matches Over Time & By Stations</h2>
-                      <TimeHistogram filters={histogramFilters} />
-                  </div>
-                )}
+            {showComparison ? (
+               (
                 <div className="card">
-                  <div id="search-results">
-                    <div className="results-header">
-                      <h2>Search Results</h2>
-                      <span>Total: {count}</span>
-                    </div>
+                  <div className="card-body">
+                    <h5 className="card-title">Keyword Comparison Groups</h5>
 
-                    {results.length > 0 ? (
-                      <div className="results-grid">
-                        {results.map((result) => (
-                          <SearchResultCard
-                            key={result.id}
-                            result={result}
-                            contextMap={contextMap}
-                            fetchContext={fetchContext}
-                            removeContext={removeContext}
-                          />
+                    {keywordGroups.map((group, groupIndex) => (
+                      <div key={groupIndex} className="mb-2">
+                        <label className="form-label">{group.label}</label>
+                        {group.keywords.map((keyword, idx) => (
+                          <div key={idx} className="input-group mb-1">
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Enter keyword"
+                              value={keyword}
+                              onChange={(e) => {
+                                const updated = [...keywordGroups];
+                                updated[groupIndex].keywords[idx] =
+                                  e.target.value;
+                                setKeywordGroups(updated);
+                              }}
+                            />
+                            <button
+                              className="btn btn-outline-danger"
+                              onClick={() => {
+                                const updated = [...keywordGroups];
+                                updated[groupIndex].keywords.splice(idx, 1);
+                                setKeywordGroups(updated);
+                              }}
+                            >
+                              −
+                            </button>
+                          </div>
                         ))}
+
+                        <button
+                          className="btn btn-outline-secondary btn-sm me-2"
+                          onClick={() => {
+                            const updated = [...keywordGroups];
+                            updated[groupIndex].keywords.push("");
+                            setKeywordGroups(updated);
+                          }}
+                        >
+                          + Add Keyword to {group.label}
+                        </button>
+
+                        {keywordGroups.length > 1 && (
+                          <button
+                            className="btn btn-outline-danger btn-sm"
+                            onClick={() => {
+                              const updated = keywordGroups.filter(
+                                (_, i) => i !== groupIndex
+                              );
+                              setKeywordGroups(updated);
+                            }}
+                          >
+                            Remove {group.label}
+                          </button>
+                        )}
                       </div>
-                    ) : (
-                      <div className="no-results-message">
-                        <p>
-                          No results found. Try different filters or keywords.
-                        </p>
+                    ))}
+
+                    <button
+                      className="btn btn-outline-primary btn-sm mt-2"
+                      onClick={() =>
+                        setKeywordGroups([
+                          ...keywordGroups,
+                          {
+                            label: `Group ${String.fromCharCode(
+                              65 + keywordGroups.length
+                            )}`,
+                            keywords: [""],
+                          },
+                        ])
+                      }
+                    >
+                      + Add Group
+                    </button>
+                  </div>
+
+                  <ComparisionGraph
+                    comparisonGroups={keywordGroups.filter((group) =>
+                      group.keywords.some(Boolean)
+                    )}
+                  />
+                </div>
+              )
+            ) : (
+              <>
+                <div className="card">
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      handleSearch(1);
+                    }}
+                  >
+                    <div className="form-grid">
+                      <MultiInputField
+                        label="Keyword"
+                        placeholder="Enter keyword..."
+                        inputs={queryInputs}
+                        setInputs={setQueryInputs}
+                      />
+                      <SearchableMultiSelectDropdown
+                        label="Station"
+                        options={stationOptions}
+                        selectedOptions={stationInputs}
+                        setSelectedOptions={setStationInputs}
+                      />
+                      <SearchableMultiSelectDropdown
+                        label="State"
+                        options={stateOptions}
+                        selectedOptions={stateInputs}
+                        setSelectedOptions={setStateInputs}
+                      />
+                      <MultiInputField
+                        label="Speaker"
+                        placeholder="Enter speaker..."
+                        inputs={speakerInputs}
+                        setInputs={setSpeakerInputs}
+                      />
+                      <div className="form-group">
+                        <label>From Date</label>
+                        <input
+                          type="date"
+                          value={startDate}
+                          onChange={(e) => setStartDate(e.target.value)}
+                          className="input-field"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label>To Date</label>
+                        <input
+                          type="date"
+                          value={endDate}
+                          onChange={(e) => setEndDate(e.target.value)}
+                          className="input-field"
+                        />
+                      </div>
+                    </div>
+                    <div className="form-actions">
+                      <div className="sort-control">
+                        <label>Sort by:</label>
+                        <select
+                          value={sortOrder}
+                          onChange={(e) => setSortOrder(e.target.value)}
+                          className="select-field"
+                        >
+                          <option value="desc">Recent to Old</option>
+                          <option value="asc">Old to Recent</option>
+                        </select>
+                      </div>
+                      <div className="action-buttons">
+                        <button type="submit" className="btn btn-primary">
+                          Search
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleExportCSV}
+                          className="btn btn-secondary"
+                        >
+                          Export CSV
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                {loading && (
+                  <div className="loading-indicator">Searching...</div>
+                )}
+
+                {searched && !loading && (
+                  <>
+                    {count > 0 && (
+                      <div className="card">
+                        <h2 className="card-title">
+                          Transcript Matches Over Time & By Stations
+                        </h2>
+                        <TimeHistogram filters={histogramFilters} />
                       </div>
                     )}
-                    {renderPagination()}
-                  </div>
-                </div>
+                    <div className="card">
+                      <div id="search-results">
+                        <div className="results-header">
+                          <h2>Search Results</h2>
+                          <span>Total: {count}</span>
+                        </div>
+
+                        {results.length > 0 ? (
+                          <div className="results-grid">
+                            {results.map((result) => (
+                              <SearchResultCard
+                                key={result.id}
+                                result={result}
+                                contextMap={contextMap}
+                                fetchContext={fetchContext}
+                                removeContext={removeContext}
+                              />
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="no-results-message">
+                            <p>
+                              No results found. Try different filters or
+                              keywords.
+                            </p>
+                          </div>
+                        )}
+                        {renderPagination()}
+                      </div>
+                    </div>
+                  </>
+                )}
               </>
             )}
           </>
