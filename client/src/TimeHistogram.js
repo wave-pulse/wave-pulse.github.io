@@ -27,11 +27,19 @@ ChartJS.register(
 );
 
 const API = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+//const getLineColor = (idx) => {
+  //const colors = [
+    //"#ff6384", "#36a2eb", "#cc65fe", "#ffce56",
+    //"#2ecc71", "#e67e22", "#1abc9c", "#9b59b6", "#34495e"
+  //];
+  //return colors[idx % colors.length];
+//};
 
-const TimeHistogram = ({ filters }) => {
+const TimeHistogram = ({ filters, comparisonGroups = [] }) => {
   const [timeData, setTimeData] = useState(null);
   const [stationData, setStationData] = useState(null);
   const [groupBy, setGroupBy] = useState('date');
+ // const [comparisonData, setComparisonData] = useState(null);
   const timeChartRef = useRef(null);
   const stationChartRef = useRef(null);
 
@@ -76,6 +84,43 @@ const TimeHistogram = ({ filters }) => {
 
     fetchData();
   }, [filters, groupBy]);
+
+ /* useEffect(() => {
+    const fetchComparisonData = async () => {
+      try {
+        const responses = await Promise.all(
+          comparisonGroups.map((group) => {
+            const params = {
+              ...filters,
+              q: group.keywords.join("|"),
+              groupBy: groupBy,
+            };
+            return axios.get(`${API}/aggregate`, { params });
+          })
+        );
+  
+        const labels = responses[0]?.data.map(d => d.label) || [];
+  
+        const datasets = responses.map((res, idx) => ({
+          label: comparisonGroups[idx].label,
+          data: res.data.map(d => d.count),
+          borderColor: getLineColor(idx),
+          backgroundColor: 'rgba(0,0,0,0)',
+          fill: false,
+          tension: 0.4,
+        }));
+  
+        setComparisonData({ labels, datasets });
+      } catch (err) {
+        console.error("Error loading keyword comparison data", err);
+      }
+    };
+  
+    if (comparisonGroups.length > 0) {
+      fetchComparisonData();
+    }
+  }, [filters, comparisonGroups, groupBy]);*/
+  
 
   const timeUnit = groupBy === 'date' ? 'day' : groupBy === 'week' ? 'week' : 'month';
 
@@ -163,6 +208,35 @@ const TimeHistogram = ({ filters }) => {
       ) : (
         <p>Loading station chart...</p>
       )}
+       {/*{comparisonGroups.length > 0 && comparisonData && (
+  <div style={{ marginTop: '50px' }}>
+    <h4>Keyword Group Comparison</h4>
+    <Line
+      data={comparisonData}
+      options={{
+        responsive: true,
+        plugins: {
+          legend: { position: 'top' },
+          title: {
+            display: true,
+            text: 'Keyword Group Trends Over Time',
+          },
+        },
+        scales: {
+          x: {
+            type: 'time',
+            time: { unit: groupBy === 'week' ? 'week' : groupBy === 'month' ? 'month' : 'day' },
+            title: { display: true, text: 'Date' },
+          },
+          y: {
+            beginAtZero: true,
+            title: { display: true, text: 'Mentions' },
+          },
+        },
+      }}
+    />
+  </div>
+)}*/}
     </div>
   );
 };
