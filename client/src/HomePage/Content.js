@@ -135,7 +135,9 @@ const Content = () => {
                             <span>Code</span>
                         </a>
                     </div>
+                    </div>
                 </div>
+                                <
             <div className="content-wrapper">
                 <td
                     style={{
