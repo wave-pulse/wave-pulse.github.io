@@ -111,33 +111,31 @@ const Content = () => {
                 {/* Buttons */}
                 <div style={{textAlign: "center", justifyContent: "center"}}>
                     <div className="flex space-x-14 mt-4">
-                        <a
+                        
                             href="https://arxiv.org/abs/2412.17998"
-                            className="flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+                            className="flex items-center space-x-2 bg-amber-50 text-amber-900 px-4 py-2 rounded hover:bg-amber-100 border border-amber-200"
                         >
                             <FileText size={20}/>
                             <span>Paper</span>
                         </a>
-                        <a
+                        
                             href="https://huggingface.co/datasets/nyu-dice-lab/wavepulse-radio-summarized-transcripts"
-                            className="flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+                            className="flex items-center space-x-2 bg-amber-50 text-amber-900 px-4 py-2 rounded hover:bg-amber-100 border border-amber-200"
                         >
                             <Database size={20}/>
                             <span>Data</span>
                         </a>
-                        <a
+                        
                             href="https://github.com/NYU-DICE-Lab/WavePulse"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center space-x-2 bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-700"
+                            className="flex items-center space-x-2 bg-amber-50 text-amber-900 px-4 py-2 rounded hover:bg-amber-100 border border-amber-200"
                         >
                             <Github size={20}/>
                             <span>Code</span>
                         </a>
                     </div>
                 </div>
-            </div>
-
             <div className="content-wrapper">
                 <td
                     style={{
