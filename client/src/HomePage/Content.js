@@ -13,8 +13,7 @@ const Content = () => {
     return (
         <div>
             {/* Author Section */}
-            <div
-                className="flex flex-col items-center text-center max-w-4xl mx-auto my-8 space-y-4">
+            <div className="flex flex-col items-center text-center max-w-4xl mx-auto my-8 space-y-4">
                 <div style={{textAlign: "center", justifyContent: "center"}}>
                     <div className="text-lg space-y-2">
                         {/* Authors */}
@@ -90,24 +89,19 @@ const Content = () => {
                         </div>
                     </div>
                     {/* Affiliations */}
-                    <div
-                        className="text-sm italic"
-                        style={{textAlign: "center", justifyContent: "center"}}
-                    >
+                    <div className="text-sm italic" style={{textAlign: "center", justifyContent: "center"}}>
                         <div>
-                            <sup>1</sup>New York University, Tandon School of
-                            Engineering,
-                            Brooklyn, NY, USA
+                            <sup>1</sup>New York University, Tandon School of Engineering, Brooklyn, NY, USA
                         </div>
                         <div>
                             <sup>2</sup>The Carter Center, Atlanta, GA, USA
                         </div>
                         <div>
-                            <sup>3</sup>Georgia Institute of Technology,
-                            Atlanta, GA, USA
+                            <sup>3</sup>Georgia Institute of Technology, Atlanta, GA, USA
                         </div>
                     </div>
                 </div>
+                
                 {/* Buttons */}
                 <div style={{textAlign: "center", justifyContent: "center"}}>
                     <div className="flex space-x-14 mt-4">
@@ -168,29 +162,22 @@ const Content = () => {
                 <div className="about-section">
                     <div>
                         <p>
-                            Radio remains a pervasive medium for mass
-                            information
-                            dissemination,
-                            with AM/FM stations reaching more Americans than
-                            either
-                            smartphone-based social networking or live
-                            television.
+                            Radio remains a pervasive medium for mass information dissemination,
+                            with AM/FM stations reaching more Americans than either
+                            smartphone-based social networking or live television.
                         </p>
                         <p>
-                            We present WavePulse, a framework
-                            that <strong>records</strong>,{" "}
+                            We present WavePulse, a framework that <strong>records</strong>,{" "}
                             <strong>documents</strong>, and{" "}
-                            <strong>analyzes live-streamed radio content in
-                                real-time</strong>.
-                            We use WavePulse to monitor livestreams of 396 news
-                            radio stations
-                            over a period of three months, processing close to
-                            500,000 hours of
+                            <strong>analyzes live-streamed radio content in real-time</strong>.
+                            We use WavePulse to monitor livestreams of 396 news radio stations
+                            over a period of three months, processing close to 500,000 hours of
                             audio streams.
                         </p>
                     </div>
                 </div>
             </div>
+
             <td
                 style={{
                     display: "flex",
@@ -225,6 +212,7 @@ const Content = () => {
                     <strong>a dataset of Nation Wide Radio transcripts</strong>.
                 </p>
             </div>
+
             <td
                 style={{
                     display: "flex",
@@ -254,15 +242,11 @@ const Content = () => {
                 </h2>
 
                 <p>
-                    We collaborated with the Carter Center which studies
-                    election
-                    integrity and tried to identify the provenance of a very
-                    specific
-                    rumor concerning the legitimacy of the 2020 Presidential
-                    Election.
+                    We collaborated with the Carter Center which studies election
+                    integrity and tried to identify the provenance of a very specific
+                    rumor concerning the legitimacy of the 2020 Presidential Election.
                     WavePulse enabled us to{" "}
-                    <strong>identify positive matches for this rumor and track
-                        it</strong>{" "}
+                    <strong>identify positive matches for this rumor and track it</strong>{" "}
                     across the US over a period of several months.
                 </p>
             </div>
@@ -286,11 +270,8 @@ const Content = () => {
                             margin: "0 auto",
                         }}
                     />
-
-                    <figcaption
-                        className="text-center mt-2 text-sm text-gray-600">
-                        # Narrative-Specific Mentions, either neutral
-                        reporting, debunking
+                    <figcaption className="text-center mt-2 text-sm text-gray-600">
+                        # Narrative-Specific Mentions, either neutral reporting, debunking
                         or promoting, encoded in the color and size of bubbles.
                     </figcaption>
                 </figure>
@@ -302,15 +283,10 @@ const Content = () => {
                 </h2>
 
                 <p>
-                    We examined <strong>content syndication across radio
-                    stations</strong>{" "}
-                    using transcript matching and hashing techniques to build
-                    a{" "}
-                    <strong>"radio syndication graph,"</strong> that revealed
-                    coordinated
-                    messaging strategies and has implications for media
-                    diversity
-                    analysis.
+                    We examined <strong>content syndication across radio stations</strong>{" "}
+                    using transcript matching and hashing techniques to build a{" "}
+                    <strong>"radio syndication graph,"</strong> that revealed coordinated
+                    messaging strategies and has implications for media diversity analysis.
                 </p>
             </div>
 
@@ -331,14 +307,10 @@ const Content = () => {
                     <figcaption
                         className="text-center mt-2 text-sm text-gray-600"
                         style={{maxWidth: "600px", margin: "0 auto"}}>
-                        From 22,149 initial content groups, we identified 1,776
-                        connected
-                        subgroups with 2,684 unique station-to-station
-                        connections. Key
-                        findings include 15 major hub stations, a 10-station
-                        regional
-                        network, and content propagation chains where stories
-                        travel between
+                        From 22,149 initial content groups, we identified 1,776 connected
+                        subgroups with 2,684 unique station-to-station connections. Key
+                        findings include 15 major hub stations, a 10-station regional
+                        network, and content propagation chains where stories travel between
                         states over time. Edges not shown for clarity.
                     </figcaption>
                 </figure>
@@ -346,26 +318,19 @@ const Content = () => {
 
             <div className="about-section">
                 <h2 style={{color: "#333333", textAlign: "center"}}>
-                    Case Study #3: Presidential Candidates' Favorability
-                    Trends{" "}
+                    Case Study #3: Presidential Candidates' Favorability Trends{" "}
                 </h2>
 
                 <p>
                     The researchers conducted{" "}
-                    <strong>NLP-based sentiment analysis</strong> on
-                    presidential
-                    candidate mentions in radio transcripts, converting them
-                    into time
+                    <strong>NLP-based sentiment analysis</strong> on presidential
+                    candidate mentions in radio transcripts, converting them into time
                     series data. By analyzing{" "}
-                    <strong>both national and state-level trends</strong>, they
-                    discovered
+                    <strong>both national and state-level trends</strong>, they discovered
                     their passive radio sentiment tracking{" "}
-                    <strong>closely matched traditional polling data</strong>.
-                    This
-                    suggests WavePulse provides a viable complementary method
-                    for
-                    monitoring public opinion through web-accessible radio
-                    content.
+                    <strong>closely matched traditional polling data</strong>. This
+                    suggests WavePulse provides a viable complementary method for
+                    monitoring public opinion through web-accessible radio content.
                 </p>
             </div>
 
@@ -391,11 +356,9 @@ const Content = () => {
                     <figcaption
                         className="text-center mt-2 text-sm text-gray-600"
                         style={{maxWidth: "600px", margin: "0 auto"}}>
-                        A dual-panel visualization comparing polling and radio
-                        sentiment
+                        A dual-panel visualization comparing polling and radio sentiment
                         data from July-September 2024. The top panel shows{" "}
-                        <strong>traditional polling averages</strong> for Trump
-                        and Harris
+                        <strong>traditional polling averages</strong> for Trump and Harris
                         from the{" "}
                         
                             href="https://www.natesilver.net/p/nate-silver-2024-president-election-polls-model"
@@ -405,10 +368,8 @@ const Content = () => {
                             Silver Bulletin
                         </a>
                         , while the bottom displays{" "}
-                        <strong>radio-derived sentiment scores</strong> using a
-                        7-day
-                        average. A notable spike occurs in Harris's sentiment
-                        when Biden
+                        <strong>radio-derived sentiment scores</strong> using a 7-day
+                        average. A notable spike occurs in Harris's sentiment when Biden
                         withdrew.
                     </figcaption>
                 </figure>
@@ -436,25 +397,21 @@ const Content = () => {
                     <figcaption
                         className="text-center mt-2 text-sm text-gray-600"
                         style={{maxWidth: "600px", margin: "0 auto"}}>
-                        A U.S. map showing {" "}
-                        <strong>state-level political sentiment trends</strong> with
-                        regional
-                        color-coding to visualize geographic patterns.
+                        A U.S. map showing <strong>state-level political sentiment trends</strong> with
+                        regional color-coding to visualize geographic patterns.
                     </figcaption>
                 </figure>
             </td>
+
             <div className="about-section">
                 <h2 style={{color: "#333333", textAlign: "center"}}>
                     Wave-Pulse.io Navigation Guide
                 </h2>
 
                 <p>
-                    Welcome to <strong>Wave Pulse</strong>, our integrated
-                    platform for
-                    analyzing radio content patterns and sentiment trends
-                    across the
-                    United States. This guide outlines the key features and
-                    navigation
+                    Welcome to <strong>Wave Pulse</strong>, our integrated platform for
+                    analyzing radio content patterns and sentiment trends across the
+                    United States. This guide outlines the key features and navigation
                     tools available to you.
                 </p>
 
@@ -462,54 +419,36 @@ const Content = () => {
                     <strong>Interactive Map Visualization</strong>
                     <br/>
                     Access our comprehensive map interface by selecting{" "}
-                    <strong>"Show Map"</strong>. Through the <strong>"Select
-                    Map"</strong>{" "}
+                    <strong>"Show Map"</strong>. Through the <strong>"Select Map"</strong>{" "}
                     dropdown, you can explore multiple visualization modes:
                 </p>
 
                 <p>
-                    - <strong>State Party - Relative</strong>: View
-                    proportional party
-                    sentiment analysis
-                    <br/>- <strong>State Party - Absolute</strong>: Examine raw
-                    party
-                    sentiment data
-                    <br/>- <strong>State Candidate - Relative</strong>: Study
-                    proportional candidate sentiment trends
-                    <br/>- <strong>State Candidate - Absolute</strong>: Review
-                    raw
-                    candidate sentiment metrics
+                    - <strong>State Party - Relative</strong>: View proportional party sentiment analysis
+                    <br/>- <strong>State Party - Absolute</strong>: Examine raw party sentiment data
+                    <br/>- <strong>State Candidate - Relative</strong>: Study proportional candidate sentiment trends
+                    <br/>- <strong>State Candidate - Absolute</strong>: Review raw candidate sentiment metrics
                 </p>
 
                 <p>
                     <strong>Data Enhancement Options</strong>
                     <br/>
-                    Augment your visualization with additional data layers
-                    using the{" "}
+                    Augment your visualization with additional data layers using the{" "}
                     <strong>"Select Overlay"</strong> menu:
                 </p>
 
                 <p>
-                    - <strong>Radio Coverage</strong>: Examine broadcast reach
-                    and
-                    penetration
-                    <br/>- <strong>Population Distribution</strong>: View
-                    demographic
-                    density patterns
-                    <br/>- <strong>County Boundaries</strong>: Add detailed
-                    geographic
-                    delineation
+                    - <strong>Radio Coverage</strong>: Examine broadcast reach and penetration
+                    <br/>- <strong>Population Distribution</strong>: View demographic density patterns
+                    <br/>- <strong>County Boundaries</strong>: Add detailed geographic delineation
                 </p>
 
                 <p>
                     <strong>Narrative Analytics</strong>
                     <br/>
-                    Through the <strong>"Select Narrative"</strong> dropdown,
-                    access
-                    focused analytical views such as the 'Georgia Election
-                    Stolen'
-                    analysis. For clarity and precision, the system displays
-                    one narrative
+                    Through the <strong>"Select Narrative"</strong> dropdown, access
+                    focused analytical views such as the 'Georgia Election Stolen'
+                    analysis. For clarity and precision, the system displays one narrative
                     analysis at a time.
                 </p>
 
@@ -517,33 +456,24 @@ const Content = () => {
                     <strong>Trend Analysis</strong>
                     <br/>
                     Access detailed temporal analysis through the{" "}
-                    <strong>"Show Daily Average"</strong> feature, which
-                    provides
-                    comprehensive charts and summaries of data patterns over
-                    time.
+                    <strong>"Show Daily Average"</strong> feature, which provides
+                    comprehensive charts and summaries of data patterns over time.
                 </p>
 
                 <p>
                     <strong>Navigation</strong>
                     <br/>
-                    The <strong>Home</strong> icon in the top-left corner
-                    serves as your
-                    anchor point, allowing you to return to the Home Page at
-                    any time. As
-                    you navigate through different views and analyses, the
-                    system provides
+                    The <strong>Home</strong> icon in the top-left corner serves as your
+                    anchor point, allowing you to return to the Home Page at any time. As
+                    you navigate through different views and analyses, the system provides
                     confirmation notifications to acknowledge your selections.
                 </p>
 
                 <p>
-                    This interface design prioritizes efficient access to our
-                    analytical
-                    tools while maintaining intuitive navigation through the
-                    platform's
-                    comprehensive feature set. Each visualization and analysis
-                    option has
-                    been carefully structured to provide maximum insight with
-                    minimal
+                    This interface design prioritizes efficient access to our analytical
+                    tools while maintaining intuitive navigation through the platform's
+                    comprehensive feature set. Each visualization and analysis option has
+                    been carefully structured to provide maximum insight with minimal
                     complexity.
                 </p>
             </div>
