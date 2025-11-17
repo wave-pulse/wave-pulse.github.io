@@ -19,7 +19,7 @@ const Content = () => {
                     <div className="text-lg space-y-2">
                         {/* Authors */}
                         <div>
-                            <a
+                            
                                 href="https://www.linkedin.com/in/mittalgovind/"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -28,7 +28,7 @@ const Content = () => {
                                 Govind Mittal
                             </a>{" "}
                             <sup>1</sup>, <br/>
-                            <a
+                            
                                 href="https://www.linkedin.com/in/sarthak99/"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -37,7 +37,7 @@ const Content = () => {
                                 Sarthak Gupta
                             </a>
                             <sup>1</sup>,{" "}
-                            <a
+                            
                                 href="https://www.linkedin.com/in/shruti-wagle/"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -46,7 +46,7 @@ const Content = () => {
                                 Shruti Wagle
                             </a>
                             <sup>1</sup>,{" "}
-                            <a
+                            
                                 href="https://www.linkedin.com/in/chiragchopra7/"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -55,7 +55,7 @@ const Content = () => {
                                 Chirag Chopra
                             </a>
                             <sup>1</sup>,{" "}
-                            <a
+                            
                                 href="https://demattee.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -64,21 +64,21 @@ const Content = () => {
                                 Anthony J DeMattee
                             </a>
                             <sup>2</sup>,{" "}
-                            <a
+                            
                                 href="https://engineering.nyu.edu/faculty/nasir-memon"
                                 className="text-blue-500 hover:underline"
                             >
                                 Nasir Memon
                             </a>
                             <sup>1</sup>,{" "}
-                            <a
+                            
                                 href="https://www.cc.gatech.edu/people/mustaque-ahamad"
                                 className="text-blue-500 hover:underline"
                             >
                                 Mustaque Ahamad
                             </a>
                             <sup>3</sup>, <br/>
-                            <a
+                            
                                 href="https://chinmayhegde.github.io/"
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -135,9 +135,9 @@ const Content = () => {
                             <span>Code</span>
                         </a>
                     </div>
-                    </div>
                 </div>
-                                <
+            </div>
+
             <div className="content-wrapper">
                 <td
                     style={{
@@ -314,40 +314,38 @@ const Content = () => {
                 </p>
             </div>
 
+            <td
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: "20px",
+                }}
+            >
+                <figure>
+                    <img
+                        src={SocialNetworkImage}
+                        alt="Radio Station Network"
+                        style={{width: "600px", height: "auto"}}
+                    />
+                    <figcaption
+                        className="text-center mt-2 text-sm text-gray-600"
+                        style={{maxWidth: "600px", margin: "0 auto"}}>
+                        From 22,149 initial content groups, we identified 1,776
+                        connected
+                        subgroups with 2,684 unique station-to-station
+                        connections. Key
+                        findings include 15 major hub stations, a 10-station
+                        regional
+                        network, and content propagation chains where stories
+                        travel between
+                        states over time. Edges not shown for clarity.
+                    </figcaption>
+                </figure>
+            </td>
 
-
-        <td
-            style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "20px",
-            }}
-        >
-            <figure>
-                <img
-                    src={SocialNetworkImage}
-                    alt="Radio Station Network"
-                    style={{width: "600px", height: "auto"}}
-                />
-                <figcaption
-                    className="text-center mt-2 text-sm text-gray-600"
-                    style={{maxWidth: "600px", margin: "0 auto"}}>
-                    From 22,149 initial content groups, we identified 1,776
-                    connected
-                    subgroups with 2,684 unique station-to-station
-                    connections. Key
-                    findings include 15 major hub stations, a 10-station
-                    regional
-                    network, and content propagation chains where stories
-                    travel between
-                    states over time. Edges not shown for clarity.
-                </figcaption>
-            </figure>
-        </td>
-
-    <div className="about-section">
-    <h2 style={{color: "#333333", textAlign: "center"}}>
+            <div className="about-section">
+                <h2 style={{color: "#333333", textAlign: "center"}}>
                     Case Study #3: Presidential Candidates' Favorability
                     Trends{" "}
                 </h2>
@@ -399,7 +397,7 @@ const Content = () => {
                         <strong>traditional polling averages</strong> for Trump
                         and Harris
                         from the{" "}
-                        <a
+                        
                             href="https://www.natesilver.net/p/nate-silver-2024-president-election-polls-model"
                             target="_blank"
                             rel="noopener noreferrer"
